@@ -1,0 +1,162 @@
+<div class="container">
+    <div class="col">
+        <div>
+            <h3>Choose Ally Pokemon</h3>
+            <input type="text" [(ngModel)]="pokemonAllyName">
+            <button *ngIf="!pokemonAlly" class="btn btn-primary" (click)="getAllyPokemon()" [disabled]="!pokemonAllyName">Get Ally Pokemon</button>
+            <button *ngIf="pokemonAlly" class="btn btn-primary" (click)="getAllyPokemon()">Pick Another Pokemon</button>
+        </div>
+    </div>
+    <div class="col" *ngIf="pokemonAlly">
+        <div>
+            <h3>{{pokemonAlly.name}}</h3>
+            <img [src]="pokemonAlly.sprites.officialFront">
+        </div>
+        <div *ngIf="moveToTest">
+            {{statUsedAtk}}: {{allyAtk}}
+        </div>
+        <div *ngIf="moveToTest">
+            <label for="nature">Beneficial Nature?: </label>
+            <input type="checkbox" name="nature" [(ngModel)]="beneficialNature" (change)="updateBeneficialNature()">{{beneficialNature}}
+        </div>
+        <div *ngIf="moveToTest">
+            <label for="nature">Bad Nature?: </label>
+            <input type="checkbox" name="nature" [(ngModel)]="badNature" (change)="updateBadNature()">{{badNature}}
+        </div>
+        <div>
+            <select [(ngModel)]="moveToTestName">
+                <option *ngFor="let m of pokemonAlly.moves" value="{{m.name}}">{{m.name}}</option>
+            </select>
+        </div>
+        <div>
+            <button class="btn btn-primary" (click)="getMoveToTest()" [disabled]="!pokemonFoe">Pick Move</button>
+        </div>
+        <div *ngIf="moveToTest">
+            <div *ngIf="moveToTest.power > 0">
+                Power: {{moveToTest.power}} <br>
+                Type: {{moveToTest.type}}/{{moveToTest.damageType}} <br>
+                Stab?: {{stab}} / {{stabMultiplier}} <br>
+                Type Effectiveness: {{typeMultiplier}}
+            </div>
+            <div>
+                <input type="range" min="-6" max="6" value="0" [(ngModel)]="stageBoostAtk">
+                {{stageBoostAtk}}
+            </div>
+            <div>
+                <button type="button" (click)="updateAtkBoosts()">Update Attack</button>
+            </div>
+            <div *ngIf="moveToTest.power < 1">
+                Please pick a different move
+            </div>
+        </div>
+        <div>
+            <input type="range" min-="0" max="31" value="15" [(ngModel)]="atkIV">
+            {{atkIV}}
+        </div>
+        <div>
+            <input type="range" min-="0" max="252" value="100" [(ngModel)]="atkEV">
+            {{atkEV}}
+        </div>
+        <div>
+            <button type="button" (click)="updateAtk()">Update HP</button>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="col">
+        <div>
+            <h3>Choose Foe Pokemon</h3>
+            <input type="text" [(ngModel)]="pokemonFoeName">
+            <button *ngIf="!pokemonFoe" class="btn btn-primary" (click)="getFoePokemon()" [disabled]="!pokemonFoeName">Get Foe Pokemon</button>
+            <button *ngIf="pokemonFoe" class="btn btn-primary" (click)="getFoePokemon()" [disabled]="!pokemonFoeName">Get Foe Pokemon</button>
+        </div>
+    </div>
+    <div class="col" *ngIf="pokemonFoe" >
+        <div>
+            <h3>{{pokemonFoe.name}}</h3>
+            <img [src]="pokemonFoe.sprites.officialFront">
+        </div>
+
+        <label for="progress">HP: {{remainingHp}} / {{foeHp}} ({{100 - remainingHpPercentage}}% damage) [{{remainingHpCrit}} / {{foeHp}} : {{remainingHpPercentageCrit}} % left]</label>
+        <div class="progress">
+            <div class="progress-bar bg-success" role="progressbar" [style.width]="remainingHpPercentageCrit + '%'" [attr.aria-valuenow]="remainingHp" aria-valuemin="0"
+                [attr.aria-valuemax]="foeHp"></div>
+            <div *ngIf="critLower" class="progress-bar bg-danger" role="progressbar" [style.width]="(remainingHpPercentage - remainingHpPercentageCrit) + '%'"aria-valuenow="15" aria-valuemin="0"
+                aria-valuemax="100">Crit</div>
+        </div>
+        <div>
+            <input type="range" min-="0" max="31" value="15" [(ngModel)]="hpIV">
+            {{hpIV}}
+        </div>
+        <div>
+            <input type="range" min-="0" max="252" value="100" [(ngModel)]="hpEV">
+            {{hpEV}}
+        </div>
+        <div>
+            <button type="button" (click)="updateHp()">Update HP</button>
+        </div>
+        <div *ngIf="moveToTest">
+            <div>
+                Defense used: {{statUsedDef}} = {{foeDef}}
+            </div>
+            <div>
+                <label for="defBoost">Defense boosts stage:</label>
+                <input type="range" min="-6" max="6" value="0" name="defBoost" [(ngModel)]="stageBoostDef" (change)="updateDefBoosts()">
+                {{stageBoostDef}}
+            </div>
+            <div>
+                <input type="range" min-="0" max="31" value="15" [(ngModel)]="defIV">
+                {{defIV}}
+            </div>
+            <div>
+                <input type="range" min-="0" max="252" value="100" [(ngModel)]="defEV">
+                {{defEV}}
+            </div>
+            <div>
+                <button class="btn btn-primary" type="button" (click)="updateDef()">
+                </button>
+            </div>
+            <div *ngIf="pokemonFoe">
+                <label for="nature">Beneficial Nature?: </label>
+                <input type="checkbox" name="nature" [(ngModel)]="beneficialNatureDef"
+                    (change)="updateBeneficialNatureDef()">{{beneficialNatureDef}}
+            </div>
+            <div *ngIf="pokemonFoe">
+                <label for="nature">Bad Nature?: </label>
+                <input type="checkbox" name="nature" [(ngModel)]="badNatureDef" (change)="updateBadNatureDef()">{{badNatureDef}}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container" *ngIf="moveToTest">
+    <div class="row">
+        <label for="item">Holding boosting item?</label>
+        <input type="checkbox" class="item" [(ngModel)]="choiceItem" (change)="updateChoiceItem()">{{choiceMultiplier}}
+    </div>
+    <div class="row">
+        <label for="screen">Screens up?</label>
+        <input type="checkbox" class="screen" [(ngModel)]="screenUp" (change)="toggleScreen()">{{screenMultiplier}}
+    </div>
+    <div class="row" *ngIf="moveToTest.damageType ==='physical'">
+        <label for="burn">Burn?</label>
+        <input type="checkbox" class="burn" [(ngModel)]="burn" (change)="toggleBurn()">{{burnMultiplier}}
+    </div>
+    <div>
+        {{weather}}: {{weatherMultiplier}}
+        <select [(ngModel)]="weather" (change)="checkWeatherMoveType(moveToTest, pokemonAlly, pokemonFoe)" >
+            <option *ngFor="let w of weatherType" [value]="w" >{{w | titlecase}}</option>
+        </select>
+    </div>
+</div>
+<div class="container" >
+    <div>
+        <button class="btn btn-primary" type="button" [disabled]="!moveToTest" (click)="calcMoveDamage()">Get Damage</button>
+    </div>
+    <div *ngIf="damageLower">
+        Expected damage: ~{{damageLower}} - {{damageUpper}}<br>
+        Crit damage: ~{{critLower}} - {{critUpper}}
+    </div>
+    <div *ngIf="damageLower == 0">
+        Expected damage: 0
+    </div>
+</div>

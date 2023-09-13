@@ -1,0 +1,15 @@
+<h1>Search Type here</h1>
+<div class="container">
+    <form [formGroup]="typeForm">
+        <label for="name">Search Item here: </label>
+        <input type="text" name="name" formControlName="name">
+        <button type="button" (click)="submit()">Find Item</button>
+    </form>
+</div>
+<div *ngIf="!i">
+    <app-item-list (sendName)="searchItemByName($event)"></app-item-list>
+</div>
+<div>
+    <app-item *ngIf="i" [i]="i"></app-item>
+</div>
+<button type="button" (click)="backToList()">Back to List</button>

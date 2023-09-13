@@ -1,0 +1,17 @@
+<h1>Search Type here</h1>
+<div class="container">
+    <form [formGroup] = "typeForm">
+        <label for="name">Search type here: </label>
+        <input type="text" name="name" formControlName="name">
+        <button type="button" (click)="submit()">Find Type</button>
+    </form>
+</div>
+<div *ngIf="!t">
+    <app-type-list (typeName)="searchTypeByName($event)"></app-type-list>
+</div>
+<div>
+    <app-type *ngIf="t" [t]="t"></app-type>
+</div>
+<button type="button" (click)="backToList()">Back to List
+    
+</button>

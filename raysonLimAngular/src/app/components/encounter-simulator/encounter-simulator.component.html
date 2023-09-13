@@ -1,0 +1,33 @@
+<div class="container" *ngIf="!emptyList">
+    <div class="row">
+        <div>
+            <button type="button" [disabled]="!chosenMethod" (click)="rollEncounter()">Encounter Simulator</button>
+        </div>
+        <div>
+            <button type="button" (click)="shinyPokemon()">Test Shiny</button>
+        </div>
+        <div>
+            <select [(ngModel)]="chosenMethod">
+                <option *ngFor="let m of encounterMethods">{{m | titlecase}}</option>
+            </select>
+            {{chosenMethod}}
+        </div>
+    </div>
+</div>
+<div class="container" *ngIf="emptyList">
+    <h1>No encounters loaded</h1>
+</div>
+<div class="container" *ngIf="encounter">
+    <div class="col">
+        <div>
+            <h1>You Encountered: </h1>
+        </div>
+        <div>
+            <img src="assets/regular/{{encounter.name | lowercase}}.png">
+            <a style="cursor: pointer;" (click)="goToPokemon(encounter.name)">{{encounter.name | titlecase }}</a> at Level {{encounter.minLevel}} via {{displayMethod}}</div>
+    </div>
+</div>
+<div class="container">
+    <button type="button" (click)="backToLocationList()">Back</button>
+</div>
+

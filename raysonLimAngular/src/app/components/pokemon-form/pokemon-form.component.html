@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="row">
+        <h1>Pokemon Search Bar</h1>
+    </div>
+    <div class="row">
+        <form class="form-control" [formGroup]="pokemonSearch" style="padding: 20px; align-items: center;">
+            <div class="form-group mb-2">
+                <label id="form-control" for="name">Input name here:&nbsp;&nbsp;</label>
+                <input type="text" name="name" class="form-control "formControlName="name" >
+            </div>
+            <button type="button" class="btn btn-primary" (click)="searchPokemon()">Find Pokemon</button>
+        </form> 
+    </div> 
+</div>
+<div>
+    <app-pokemon *ngIf="pp" [p]="pp"></app-pokemon>
+</div>
+<div class="container" style="padding: 10px">
+    <app-pokemon-list *ngIf="!pp" (nameToSearch)="onPokemonClicked($event)"></app-pokemon-list>
+</div>
+<div class="container">
+    <div class="col">
+        <button (click)="backToList()">Back to list</button>
+    </div>
+    
+</div>
+

@@ -1,0 +1,123 @@
+<div *ngIf="pokemonElement">
+    <div class="container">
+        <h1>Pokemon Details</h1>
+        <table>
+            <tr>
+                <td>{{pokemonElement.name}}</td>
+                <td>{{pokemonElement.id}}</td>
+            </tr>
+            <tr><td>Hp: {{pokemonElement.stats.hp}}</td></tr>
+            <tr><td>Attack: {{pokemonElement.stats.attack}}</td></tr>
+            <tr><td>Defense: {{pokemonElement.stats.defense}}</td></tr>
+            <tr><td>Special Attack: {{pokemonElement.stats.specialAttack}}</td></tr>
+            <tr><td>Special Defense: {{pokemonElement.stats.specialDefense}}</td></tr>
+            <tr><td>Speed: {{pokemonElement.stats.speed}}</td></tr>
+        </table>
+    </div>
+    
+    <div class="container">
+        <h1>Moves</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 300px">Move Learn Method/Level Learned At</th>
+                    <th>Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let move of pokemonElement.moves | sortMoves | sortByMethod">
+                    <td>
+                        <div> Level {{move.levelLearnedAt}}</div>
+                    </td>
+                    <td>{{move.name| titlecase}}</td>
+                </tr>
+                <tr *ngFor="let move of pokemonElement.moves | sortTutor">
+                    <td>
+                    <div>Move Tutor</div>
+                    </td>
+                    <td>{{move.name| titlecase}}</td>
+                </tr>
+                <tr *ngFor="let move of pokemonElement.moves | sortEggMoves">
+                    <td>
+                        <div>Egg Move</div>
+                    </td>
+                    <td>{{move.name| titlecase}}</td>
+                </tr>
+                <tr *ngFor="let move of pokemonElement.moves | sortTMHM ">
+                    <td>
+                        <div>TM/HM</div>
+                    </td>
+                    <td>{{move.name | titlecase }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <h1>Sprites</h1>
+        <table class="table table-bordered table-centered">
+            <thead>
+                <tr>
+                    <th>Back (Default)</th>
+                    <th *ngIf="pokemonElement.sprites.backFemale !== 'null'">
+                        Back (Female)
+                    </th>
+                    <th>Back (Shiny)</th>
+                    <th *ngIf="pokemonElement.sprites.backShinyFemale !== 'null'">
+                        Back (Shiny & Female)
+                    </th>
+                    <th>Front (Default)</th>
+                    <th *ngIf="pokemonElement.sprites.frontFemale !== 'null'">
+                        Front (Female)
+                    </th>
+                    <th>Front (Shiny)</th>
+                    <th *ngIf="pokemonElement.sprites.frontShinyFemale !== 'null'">
+                        Front (Shiny & Female)
+                    </th>
+                    <th>Official Artwork</th>
+                    <th>Official  (Shiny)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <img [src]='pokemonElement.sprites.backDefault' class="rounded mx-auto d-block" >
+                    </td>
+                    <td *ngIf="pokemonElement.sprites.backFemale !== 'null'">
+                        <img [src]='pokemonElement.sprites.backFemale' class="rounded mx-auto d-block" >
+                    </td>
+                    <td>
+                        <img [src]='pokemonElement.sprites.backShiny' class="rounded mx-auto d-block" >
+                    </td>
+                    <td *ngIf="pokemonElement.sprites.backShinyFemale !== 'null'">
+                        <img [src]='pokemonElement.sprites.backShinyFemale' class="rounded mx-auto d-block" >
+                    </td>
+                    <td>
+                        <img [src]='pokemonElement.sprites.frontDefault' class="rounded mx-auto d-block" >
+                    </td>
+                    <td *ngIf="pokemonElement.sprites.frontFemale !== 'null'">
+                        <img [src]='pokemonElement.sprites.frontFemale' class="rounded mx-auto d-block" >
+                    </td>
+                    <td>
+                        <img [src]='pokemonElement.sprites.frontShiny' class="rounded mx-auto d-block" >
+                    </td>
+                    <td *ngIf="pokemonElement.sprites.frontShinyFemale !== 'null'">
+                        <img [src]='pokemonElement.sprites.frontShinyFemale' class="rounded mx-auto d-block" >
+                    </td>
+                    <td>
+                        <img [src]='pokemonElement.sprites.officialFront' style="height: 100px" class="rounded mx-auto d-block" >
+                    </td>
+                    <td>
+                        <img [src]='pokemonElement.sprites.officialShiny' style="height: 100px" class="rounded mx-auto d-block" >
+                    </td>
+                </tr>           
+            </tbody>
+        </table>
+    </div>
+</div>
+<div *ngIf="!pokemonElement" class="container">
+    <h2>No pokemon loaded</h2>
+</div>
+<div class="container">
+    <div class="col">
+        <button type="button" (click)="backToPokemonList()">Go Back</button>
+    </div>
+    
+</div>

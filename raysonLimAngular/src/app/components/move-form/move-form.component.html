@@ -1,0 +1,15 @@
+<h1>Search Move here</h1>
+<div class="container">
+    <form [formGroup]="typeForm">
+        <label for="name">Search move here: </label>
+        <input type="text" name="name" formControlName="name">
+        <button type="button" (click)="submit()">Find Move</button>
+    </form>
+</div>
+<div *ngIf="!m">
+    <app-move-list (moveName)="searchMoveByName($event)"></app-move-list>
+</div>
+<div>
+    <app-moves *ngIf="m" [m]="m"></app-moves>
+</div>
+<button type="button" (click)="backToList()">Back to List</button>

@@ -1,0 +1,20 @@
+<form [formGroup]="shop">
+    <h1>Total Amount to pay: {{amountToPay}}</h1>
+    <div>
+        <table *ngFor="let i of inventory; let ind = index">
+            <tr>
+                <td>{{i}}
+                </td>
+                <td>
+                    <select formControlName='{{i}}qty'>
+                        <option *ngFor="let n of [1,2,3,4,5,6,7,8,9,10]" [value]="n">{{n}}</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+       <button type="button" (click)='addToCart()'>Add to Cart</button> 
+    </div>
+</form>
+
+<button type="button" (click)="makePayment()">Pay</button>
+

@@ -1,0 +1,24 @@
+<div class="container" *ngIf="transactionMsg">
+    <h1>{{transactionMsg}}</h1>
+</div>
+<div class="paypal-container" id="donateToMe" *ngIf="!transactionMsg">
+    <div>Donate : ${{amount}}</div>
+    <div  *ngIf="customAmt">
+        <select [(ngModel)]="amount">
+            <option *ngFor="let d of donationAmounts" [value]="d">{{d}}</option>
+        </select>
+    </div>
+    <div *ngIf="!customAmt">
+        <input type="number" [(ngModel)]="amount">
+    </div>
+    <div>
+        <button class="btn btn-primary" *ngIf="customAmt" (click)="togglePaymentAmount()">Custom Donation</button>
+        <button class="btn btn-primary"  *ngIf="!customAmt" (click)="togglePaymentAmount()">Fixed Donation</button>
+    </div>
+    <div>
+        <button class="btn btn-primary" (click)="generateButton()">
+            Donate
+        </button>
+    </div>
+    <div #paymentRef></div>
+</div>

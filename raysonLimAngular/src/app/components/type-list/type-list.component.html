@@ -1,0 +1,8 @@
+<div>
+    <table class="table">
+        <tr *ngFor="let t of type">
+            <td><a (click)="sendName(t.name)" style="cursor: pointer;">{{t.name}}</a></td>
+        </tr>
+    </table>
+</div>
+

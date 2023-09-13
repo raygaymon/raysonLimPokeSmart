@@ -1,0 +1,11 @@
+<table class="table">
+    <tr *ngFor="let a of abilities">
+        <td><a (click)="sendAbilityName(a)" style="cursor: pointer;">{{a | titlecase }}</a></td>
+    </tr>
+</table>
+
+Page:
+<a *ngFor="let n of pages" (click)="goToPage(n)" style="cursor: pointer;color: blue"><u>{{n}}</u>&nbsp;&nbsp;</a>
+<div>
+    <button type="button" (click)="goToPage(1)">Top Of List</button>
+</div>

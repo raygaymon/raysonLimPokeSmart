@@ -1,0 +1,15 @@
+<div>
+    <table class="table">
+        <tr *ngFor="let m of moves">
+            <td><a (click)="sendMoveName(m)" style="cursor: pointer;">{{m |titlecase}}</a></td>
+        </tr>
+    </table>
+</div>
+<div>
+    Page:
+    <a *ngFor="let n of pages" (click)="goToPage(n)" style="cursor: pointer;color: blue"><u>{{n}}</u>&nbsp;&nbsp;</a>
+</div>
+<div>
+    <button type="button" (click)="goToPage(1)">Top Of List</button>
+</div>
+

@@ -1,0 +1,14 @@
+
+<div>
+    <table class="table">
+    <tr *ngFor="let la of locationAreas">
+        <td><a (click)="sendLocationAreaName(la)" style="cursor: pointer;">{{la | titlecase }}</a></td>
+    </tr>
+</table>
+
+Page:
+<a *ngFor="let n of pages" (click)="goToPage(n)" style="cursor: pointer;color: blue"><u>{{n}}</u>&nbsp;&nbsp;</a>
+</div>
+<div>
+    <button type="button" (click)="goToPage(1)">Top Of List</button>
+</div>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body th:object="${pokemon}">
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Abilities</th>
+                <th>Type</th>
+                <th>Moves</th>
+                <th>Stats</th>
+                <th>Sprites</th>
+                <th>Location</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td th:text="${pokemon.id}"></td>
+                <td th:text="${pokemon.name}"></td>
+                <td th:text="${pokemon.abilities}"></td>
+                <td th:text="${pokemon.moves}"></td>
+                <td th:text="${pokemon.types}"></td>
+                <td th:text="${pokemon.stats}"></td>
+                <td th:text="${pokemon.sprites}"></td>
+                <td th:text="${pokemon.locationAreaEncounters}"></td>
+            </tr> 
+        </tbody>
+    </table>
+    <a href="/homepage">Go back</a>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<div class="container">
+  <div class="left" style="float: left">
+    <a routerLink="register-login" class="nav-link">Enter Credentials</a>
+  </div>
+  <div class="right" style="float: right">
+    <a routerLink="donate" style="text-align:right; display: inline-block;" class="nav-link">Donate</a>
+  </div>
+</div>
+<div class="container">
+  <img src="assets/pokemonLogo.png" class="rounded mx-auto d-block" style="height: 100px">
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <ul class="nav nav-tabs">
+        <li class="nav-item" role="presentation">
+          <a routerLink="/pokemon" 
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{exact: true}" class="nav-link">Pokemon</a>
+        </li>
+        <li class="nav-item" role="presentation" >
+          <a routerLink="type" class="nav-link" routerLinkActive="active">Type</a>
+        </li>
+        <li class="nav-item" role="presentation" >
+          <a routerLink="/item" class="nav-link" routerLinkActive="active">Item</a>
+        </li>
+        <li class="nav-item" role="presentation" >
+          <a routerLink="/move" class="nav-link" routerLinkActive="active">Moves</a>
+        </li>
+        <li class="nav-item" role="presentation" >
+          <a routerLink="/ability" class="nav-link" routerLinkActive="active">Ability</a>
+        </li>
+        <li class="nav-item" role="presentation" >
+          <a routerLink="/location-area" class="nav-link" routerLinkActive="active">Locations</a>
+        </li>
+        <li class="nav-item" role="presentation" >
+          <a routerLink="/damage-simulator" class="nav-link" routerLinkActive="active">Damage Simulator</a>
+        </li>
+        <li class="nav-item" role="presentation" >
+          <a routerLink="/forum" class="nav-link" routerLinkActive="active">Forum</a>
+        </li>
+        <li class="nav-item" role="presentation" >
+          <a routerLink="/pay" class="nav-link" routerLinkActive="active">Shop</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <h4>Find Us At: 25 Heng Mui Keng Terrace, Institute of Systems Science, Singapore 119615</h4>
+    <div #map style="width:100%;height:100px"></div>
+  </div>
+</div>

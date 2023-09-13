@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="cols">
+        <table class="table">
+            <thead>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Effect</th>
+                <th scope="col">Flavor Text</th>
+                <th scope="col">Pokemon With Ability</th>
+            </thead>
+            <tbody>
+                <th scope="row">{{a.id}}</th>
+                <td style="padding: 20px">{{a.name | titlecase}}</td>
+                <td style="padding: 20px">{{a.detailedDesc}}</td>
+                <td style="padding: 20px">{{a.desc}}</td>
+                <td style="padding: 20px">
+                    <div *ngFor="let p of a.pokemonWithAbility">
+                        {{p | titlecase}}
+                    </div>
+                </td>
+            </tbody>
+        </table>
+    </div>
+</div>

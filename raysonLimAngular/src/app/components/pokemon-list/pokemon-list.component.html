@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="table-responsive">
+        <table class="table align-middle table-danger table-sm ">
+            <thead>
+                <tr>
+                    <th scope="col" style="text-align: center">#</th>
+                    <th style="text-align: center">Pokemon</th>
+                </tr>
+            </thead>
+            <tbody>
+               <tr *ngFor="let la of pokemons, let i = index" class="table-active" style="text-align: center">
+                <td class="table-active" scope="row">{{i+1}}</td>
+                <td scope="row">
+                    <div>
+                        <img src="assets/regular/{{la| lowercase}}.png">
+                    </div>
+                    <a (click)="getPokemonDetails(la)" style="cursor: pointer;" >{{la | titlecase }}</a></td>
+            </tr> 
+            </tbody>
+            
+        </table>
+    </div>
+</div>
+
+<div class="container" style="padding:5px">
+    <div class="col">
+        Page: 
+        <a *ngFor="let n of pages" (click)="goToPage(n)" style="cursor: pointer;color: blue"><u>{{n}}</u>&nbsp;&nbsp;</a>
+    </div>
+</div>
+<div class="container" style="padding:5px">
+    <button type="button" (click)="goToPage(1)">Top Of List</button>
+</div>

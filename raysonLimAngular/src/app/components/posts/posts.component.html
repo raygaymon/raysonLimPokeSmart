@@ -1,0 +1,70 @@
+<div class="container">
+    <table class="table">
+        <tr *ngFor="let p of posts, let i = index">
+            <td><a (click)="seeReplies(i)" style="cursor: pointer" >{{i + 1}}</a></td>
+            <td *ngIf="p.id != null">{{p.id}}</td>
+            <td *ngIf="p.id == null">you suck</td>
+            <td>{{p.username}}</td>
+            <td>{{p.topic}}</td>
+            <td *ngIf="p.topic != 'Rate My Build'">{{p.post}}</td>
+            <td *ngIf="p.topic == 'Rate My Build'">
+                <table>
+                    <tr>
+                        <td>{{p.pokeBuild.name}}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img src="{{p.pokeBuild.imageurl}}">
+                        </td>
+                        <td>
+                            <div>
+                                Moves: 
+                            </div>
+                            <div>
+                                <ul>
+                                    <li>{{p.pokeBuild.move1}}</li>
+                                    <li>{{p.pokeBuild.move2}}</li>
+                                    <li>{{p.pokeBuild.move3}}</li>
+                                    <li>{{p.pokeBuild.move4}}</li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td *ngIf="p.imageUrl">
+                <img [src]="p.imageUrl" style="height: 50px">
+            </td>
+            <td><button type="button" class="btn btn-danger" (click)="deletePost(p.id)">Delete post</button></td>
+        </tr>
+    </table>
+</div>
+<div class="container" *ngIf="noReplies">
+    <h4>No Replies for this post. Be the first!</h4>
+</div>
+<div class="container" *ngIf="!noReplies">
+    <div class="row">
+        <table class="table">
+            <tr *ngFor="let r of replies">
+                <td>{{r.username}}</td>
+                <td>{{r.post}}</td>
+            </tr>
+        </table>
+    </div>
+</div>
+<button type="button" (click)="createForm()" *ngIf="posts.length == 1">Reply</button>  
+<div class="container" *ngIf="wantToReply">
+    <form [formGroup]="reply">
+        <div>
+            <label for="username" class="user">Username: {{username}}</label>
+            <input type="hidden" name="username" [value]="username" formControlName="username">
+        </div>
+        <div>
+            <label for="post" class="post">Reply: </label>
+            <input type="text" formControlName="post">
+        </div>
+        <div>
+            <button type="button" (click)="submitReply()">Submit reply</button>
+        </div>
+    </form>
+</div>

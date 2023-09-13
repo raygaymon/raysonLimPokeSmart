@@ -1,0 +1,65 @@
+<div>
+    <h1>Location Area Details</h1>
+    <div *ngIf="la">
+        <h3>
+           {{la.name | titlecase}} 
+        </h3>
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th>Pokemon Name</th>
+                <th>Encounter Chance</th>
+                <th>Level Range</th>
+                <th style="padding: 30px">Encounter Methods</th>
+                <th>Versions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let ep of la.pokemonEncounters">
+                <td>
+                    <img src="assets/regular/{{ep.name | lowercase}}.png">
+                </td>
+                <td>
+                    <a (click)="goToPokemon(ep.name)" style="cursor: pointer;">{{ep.name | titlecase}}</a>
+                </td>
+                <td>
+                    {{ep.maxChance}}%
+                </td>
+                <td>
+                    <div *ngIf="ep.maxLevel !== ep.minLevel">
+                       {{ep.minLevel}} - {{ep.maxLevel}}
+                    </div>
+                    <div *ngIf="ep.minLevel === ep.maxLevel">
+                        {{ep.maxLevel}} 
+                    </div>
+                </td>
+                <td style="padding: 20px; width: 500px">
+                    <div *ngFor="let m of ep.encounterMethods">
+                      {{m | titlecase}}  
+                    </div>
+                    <br>
+                    <div *ngIf="ep.conditions.length">
+                        <u>Conditions</u>
+                        <div *ngFor="let c of ep.conditions" >
+                        {{c}}
+                        </div>
+                    </div>
+                    <div *ngIf="!ep.conditions">
+                        None
+                    </div>
+                </td>
+                <td>
+                    <div *ngFor="let v of ep.versions">
+                      {{v | titlecase}}  
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+</div>
+<app-location-area (laEmitter)="onNameReceived($event)" *ngIf="!la"></app-location-area>
+<router-outlet></router-outlet>
+<button type="button" (click)="backToList()">Back to List</button>
+<button type="button" (click)="goToSimulator()">Simulate Encounters</button>

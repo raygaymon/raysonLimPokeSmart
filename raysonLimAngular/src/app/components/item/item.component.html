@@ -1,0 +1,35 @@
+<div class="container">
+    <div class="cols">
+        <table class="table">
+            <thead>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Cost</th>
+                <th scope="col">Fling</th>
+                <th scope="col">Effect</th>
+                <th scope="col">Flavor Text</th>
+                <th scope="col">Icon</th>
+            </thead>
+            <tbody>
+                <th scope="row">{{item.id}}</th>
+                <td style="padding: 20px">{{item.name | titlecase}}</td>
+                <td style="padding: 20px">{{item.cost}}</td>
+                <td style="padding: 20px">
+                    <label for="effect">Effect: </label>
+                    <div name="effect">
+                        {{item.fling.effect}}
+                    </div>
+                    <label for="power">Power: </label>
+                    <div name="power">
+                        {{item.fling.power}}
+                    </div>
+                </td>
+                <td style="padding: 20px">{{item.effect}}</td>
+                <td style="padding: 20px">{{item.flavorText}}</td>
+                <td>
+                    <img [src]="item.sprite">
+                </td>
+            </tbody>
+        </table>
+    </div>
+</div>
