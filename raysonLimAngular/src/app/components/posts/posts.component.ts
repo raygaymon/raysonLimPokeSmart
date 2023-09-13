@@ -45,9 +45,12 @@ export class PostsComponent {
       this.posts = this.posts.filter(function (x) { return x === selectedPost })
       
       this.postId=this.posts[0].id
+      console.log(this.postId)
       this.getAllRepliesByTopic()
 
     } else if (this.posts.length = 1) {
+      this.postId = this.posts[0].id
+      console.log(this.postId)
       this.getAllRepliesByTopic()
 
     } else {

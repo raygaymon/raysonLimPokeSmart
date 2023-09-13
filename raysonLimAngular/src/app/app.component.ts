@@ -16,6 +16,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
 
+    localStorage.clear()
     this.route.queryParams.subscribe( params => {
       console.log(params)  
       this.paymentId = params['paymentId'],

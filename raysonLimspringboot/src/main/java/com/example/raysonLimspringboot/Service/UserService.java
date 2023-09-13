@@ -50,7 +50,7 @@ public class UserService {
 
         String id = UUID.randomUUID().toString().substring(0, 8);
 
-        User user = new User(id, signUp.username(), signUp.password().toString(), signUp.email());
+        User user = new User(id, signUp.username(), signUp.password().toString(), signUp.email(), 0);
         user.setPassword(passwordEncoder.encode(CharBuffer.wrap(signUp.password())));
 
         if (userRepository.insertNewUser(user) > 0) {

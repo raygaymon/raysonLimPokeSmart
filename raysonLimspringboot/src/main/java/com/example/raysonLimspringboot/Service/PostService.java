@@ -3,11 +3,14 @@ package com.example.raysonLimspringboot.Service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.raysonLimspringboot.COnfig.AppException;
 import com.example.raysonLimspringboot.Model.posts.Post;
+import com.example.raysonLimspringboot.Model.posts.User;
 import com.example.raysonLimspringboot.Repository.PostUploadRepo;
 import com.example.raysonLimspringboot.Repository.UserRepo;
 
@@ -46,12 +49,15 @@ public class PostService {
     @Transactional
     public Integer newPost (Post p){
 
-        Integer postCount = userRepo.getPostCount(p.getUserName());
-        if(postCount == null){
-            postCount = 1;
-            Boolean updatePostCountSuccess = userRepo.updatePostCount(p.getUserName(), postCount);
+        User user = userRepo.findUserByUsername(p.getUserName())
+                                    .orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
+
+        Integer postCountOfUser = user.getPostCount();
+        if(postCountOfUser == 0){
+            postCountOfUser = 1;
+            Boolean updatePostCountSuccess = userRepo.updatePostCount(p.getUserName(), postCountOfUser);
         }   else {
-            Boolean updatePostCountSuccess = userRepo.updatePostCount(p.getUserName(), postCount + 1);
+            Boolean updatePostCountSuccess = userRepo.updatePostCount(p.getUserName(), postCountOfUser + 1);
         }
         
         Integer postId = postRepo.newPost(p);
@@ -59,7 +65,19 @@ public class PostService {
         return postId;
     }
 
+    @Transactional
     public Integer newPostWithImage (Post p, String imageUrl){
+
+        User user = userRepo.findUserByUsername(p.getUserName())
+                                    .orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
+
+        Integer postCountOfUser = user.getPostCount();
+        if(postCountOfUser == 0){
+            postCountOfUser = 1;
+            Boolean updatePostCountSuccess = userRepo.updatePostCount(p.getUserName(), postCountOfUser);
+        }   else {
+            Boolean updatePostCountSuccess = userRepo.updatePostCount(p.getUserName(), postCountOfUser + 1);
+        }
         return postRepo.newPostWithImage(p, imageUrl);
     }
 }
