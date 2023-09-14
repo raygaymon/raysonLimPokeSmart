@@ -62,8 +62,8 @@ public class PaypalService {
         payment.setTransactions(transactions);
 
         RedirectUrls redirectUrls = new RedirectUrls();
-        redirectUrls.setCancelUrl("http://localhost:4200/cancel");
-        redirectUrls.setReturnUrl("http://localhost:4200/");
+        redirectUrls.setCancelUrl("https://rayson-lim-pokesmart-production.up.railway.app/");
+        redirectUrls.setReturnUrl("https://rayson-lim-pokesmart-production.up.railway.app/");
         payment.setRedirectUrls(redirectUrls);
         Payment createdPayment;
 
