@@ -99,6 +99,7 @@ export class AppComponent implements OnInit {
   }
 
   logOutPopUp(){
+    console.log("logging out")
     this.dialogRef.open(LogoutComponent, {
       data : {
         'name': localStorage.getItem('username')
@@ -109,6 +110,7 @@ export class AppComponent implements OnInit {
   }
 
   logout(){
+    console.log()
     localStorage.clear()
     this.router.navigate(['/'])
   }

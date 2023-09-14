@@ -1,10 +1,10 @@
 <div class="container">
-  <div class="left" style="float: left" *ngIf="!token">
+  <div class="left" *ngIf="!token">
     <button type="button" class="btn btn-success" (click)="loginPopUp()">Login</button>
-    <!-- <a routerLink="register-login" class="nav-link">Enter Credentials</a> -->
+    
   </div>
-  <div class="left" style="float: left" *ngIf="token">
-    <button type="button" class="btn btn-danger" (click)="logOutPopUp()">Log Out</button>
+  <div class="left" style="float: left; padding: 10px" >
+  <button type="button" class="btn btn-danger" (click)="logOutPopUp()">Log Out</button>
   </div>
   <div class="right" style="float: right">
     <button class="btn btn-warning" (click)="donationPopUp()">
