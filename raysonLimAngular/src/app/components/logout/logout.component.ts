@@ -22,7 +22,6 @@ export class LogoutComponent {
   logOut(){
     localStorage.clear()
     this.user.emitToken('')
-
     this.router.navigate(['/'])
   }
 }

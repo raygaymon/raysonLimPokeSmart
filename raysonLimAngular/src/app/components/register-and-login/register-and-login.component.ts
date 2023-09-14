@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { Subject, firstValueFrom } from 'rxjs';
 import { LoginRecord, SignUpRecord } from 'src/app/models';
 import { UserServiceService } from 'src/app/services/user-service.service';
-import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-register-and-login',
@@ -64,7 +63,6 @@ export class RegisterAndLoginComponent implements OnInit, AfterViewChecked {
   }
 
   submitRegister(){
-    console.log(this.register.value)
     let signup: SignUpRecord = this.register.value
 
     firstValueFrom(
@@ -73,14 +71,12 @@ export class RegisterAndLoginComponent implements OnInit, AfterViewChecked {
       alert("Thank you for registering! Please Proceed To Login")
       this.loginOrRegister=false
     }).catch((err) => {
-      console.log(err),
       this.errorMessage = err.error.message
     })
   }
 
   submitLogin(){
 
-    console.log(this.login.value)
     let login : LoginRecord = this.login.value
 
     firstValueFrom(

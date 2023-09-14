@@ -39,8 +39,7 @@ export class AppComponent implements OnInit {
 
     localStorage.clear()
 
-    this.route.queryParams.subscribe( params => {
-      console.log(params)  
+    this.route.queryParams.subscribe( params => { 
       this.paymentId = params['paymentId'],
       this.payerId = params['PayerID']
       if(this.paymentId && this.payerId){
@@ -74,7 +73,6 @@ export class AppComponent implements OnInit {
     return this.http.post('paypal/complete/payment', paymentId, {
       params: param
     }).subscribe((response) => {
-      console.log(response)
       this.dialogRef.open(ForumPopupComponent, {
         data: {
           'message': 'Your payment wen through successfully! Please check your email for your receipt.',

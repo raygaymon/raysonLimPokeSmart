@@ -29,8 +29,6 @@ export class ForumComponent implements OnInit {
   token: string
   username: string
 
-  //TODO: add username to reply auto; clean up aesthetic
-
   posts: Post[] = []
   topics: string[] = ['Show Off', 'Looking For Help', 'Rate My Build']
   chosenTopic: string
@@ -118,7 +116,6 @@ export class ForumComponent implements OnInit {
             let post = p
             if(post.topic =="Rate My Build"){
               let pokeBuild: PokemonBuild = JSON.parse(p.post)
-              console.log(pokeBuild)
               post.pokeBuild = pokeBuild
             }
             if (!this.posts.includes(post)) {
@@ -127,7 +124,6 @@ export class ForumComponent implements OnInit {
           }
         },
         error: (err) => {
-          console.log(err.error)
           this.errMsg = "There are no posts for this topic"
         },
         complete: () => this.sub.unsubscribe()
