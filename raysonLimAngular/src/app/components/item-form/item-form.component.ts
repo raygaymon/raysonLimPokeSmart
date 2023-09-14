@@ -13,6 +13,7 @@ export class ItemFormComponent {
   private fb = inject(FormBuilder)
   typeForm: FormGroup
   i: Item
+  errMsg: string
 
   ngOnInit(): void {
     this.typeForm = this.fb.group({
@@ -21,10 +22,14 @@ export class ItemFormComponent {
   }
 
   searchItemByName(name: string) {
-    this.service.getItemByName(name).subscribe((response) => {
+    this.service.getItemByName(name).subscribe({
+    next : (response) => {
     this.i = response
     console.log(response)
-    })
+    }, 
+      error: () => 
+      this.errMsg = "Something went wrong, please double check the name you are searching"
+  })
   }
 
   submit() {

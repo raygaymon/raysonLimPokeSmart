@@ -1,9 +1,10 @@
-import { AfterViewChecked, Component, OnInit, inject } from '@angular/core';
+import { AfterViewChecked, Component, Inject, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { firstValueFrom } from 'rxjs';
+import { Subject, firstValueFrom } from 'rxjs';
 import { LoginRecord, SignUpRecord } from 'src/app/models';
 import { UserServiceService } from 'src/app/services/user-service.service';
+import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-register-and-login',
@@ -19,15 +20,20 @@ export class RegisterAndLoginComponent implements OnInit, AfterViewChecked {
     }
   }
 
+ 
+  username: string
   private service = inject(UserServiceService)
   private router = inject(Router)
+  inputType: string = 'password'
 
   ngOnInit(): void {
+
     this.registerForm()
     this.loginForm()
   }
 
   private fb = inject(FormBuilder)
+
   register: FormGroup
   login: FormGroup
   errorMessage: string
@@ -47,6 +53,14 @@ export class RegisterAndLoginComponent implements OnInit, AfterViewChecked {
       'username': this.fb.control<string>(''),
       'password': this.fb.control<string>('')
     })
+  }
+
+  passwordVisiblity(){
+    if(this.inputType == 'password'){
+      this.inputType = "text"
+    } else {
+      this.inputType = "password"
+    }
   }
 
   submitRegister(){
@@ -72,12 +86,14 @@ export class RegisterAndLoginComponent implements OnInit, AfterViewChecked {
     firstValueFrom(
       this.service.login(login)
     ).then((response) => {
+      this.service.emitToken(response.token)
       localStorage.setItem("token", response.token)
       localStorage.setItem("username", response.username)
     }).catch((err) => {
       console.log(err),
       this.errorMessage = err.error.message
     }).then(()=> {
+      this.loggedIn = true
       this.redirectToForum()
     })
   }
@@ -94,5 +110,9 @@ export class RegisterAndLoginComponent implements OnInit, AfterViewChecked {
     } else {
       this.loginOrRegister = true
     }
+  }
+
+  logout() {
+    localStorage.clear()
   }
 }

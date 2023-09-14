@@ -1,20 +1,47 @@
-<form [formGroup]="shop">
-    <h1>Total Amount to pay: {{amountToPay}}</h1>
-    <div>
-        <table *ngFor="let i of inventory; let ind = index">
-            <tr>
-                <td>{{i}}
-                </td>
-                <td>
-                    <select formControlName='{{i}}qty'>
-                        <option *ngFor="let n of [1,2,3,4,5,6,7,8,9,10]" [value]="n">{{n}}</option>
-                    </select>
-                </td>
-            </tr>
-        </table>
-       <button type="button" (click)='addToCart()'>Add to Cart</button> 
+<div class="container">
+    <div class="d-flex justify-content-center">
+        <h1>Welcome to the PokesMart</h1>
     </div>
-</form>
-
-<button type="button" (click)="makePayment()">Pay</button>
-
+    <div class="d-flex justify-content-center">
+        <h4>Shop our MasterCar- i mean MasterBall collection now!</h4>
+    </div>
+    <div class="d-flex justify-content-center">
+        <p>(Disclaimer: Products seen are only placeholders)</p>
+    </div>
+    <div class="row">
+        <form [formGroup]="shop">
+            <table class="table">
+                <thead class="thead-dark">
+                    <th scope="col"></th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Quantity</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let i of inventory">
+                        <th scope="row">
+                            <img src="./assets/{{i.name}}.png" style="height: 200px" class="rounded mx-auto d-block">
+                        </th>
+                        <td>{{i.name | titlecase}}</td>
+                        <td>{{i.price}} each </td>
+                        <td>
+                            <select formControlName='{{i.name}}qty' class="custom-select mr-sm-2">
+                                <option *ngFor="let n of [1,2,3,4,5,6,7,8,9,10]" [value]="n">{{n}}</option>
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        <br>
+    <button type="button" (click)='addToCart()' class="btn btn-outline-secondary">Add to Cart</button>
+    </form>
+    <br>
+    <div class="d-flex justify-content-center">
+        <h6>Total Amount to pay: ${{amountToPay}}USD</h6>
+    </div>
+    <div style="padding: 10px">
+        <button type="button" (click)="makePayment()" class="btn btn-primary">Pay</button>
+    </div>
+    
+</div>
+</div>

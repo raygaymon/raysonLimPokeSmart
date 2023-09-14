@@ -27,6 +27,11 @@ export class DonationComponent implements AfterViewInit {
   generateButton(){
     if(!this.paypalButtonGenerated){
       window.paypal.Buttons({
+        style: {
+          color: 'gold',
+          shape: 'pill',
+          layout: 'vertical'
+        },
         createOrder: (data: any, action: any) => {
           return action.order.create({
             purchase_units: [

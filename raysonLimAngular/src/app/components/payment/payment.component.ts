@@ -15,7 +15,7 @@ export class PaymentComponent {
   shop: FormGroup
   amountToPay: number = 0
   item: { name: string, price: number }
-  inventory: string[] = ['shirt', 'blanket', 'badge', 'pants', 'hat']
+  inventory: any[] = [{ name: 'shirt', price: 25 }, { name: 'pants', price: 60 }, { name: 'badge', price: 5 }, { name: 'blanket', price: 80 }, { name: 'hat', price: 15 }]
   cart: any[] = []
 
   ngOnInit(): void {

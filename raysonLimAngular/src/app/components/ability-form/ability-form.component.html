@@ -1,15 +1,23 @@
-<h1>Search Ability here</h1>
+
+
 <div class="container">
-    <form [formGroup]="typeForm">
-        <label for="name">Search Ability here: </label>
-        <input type="text" name="name" formControlName="name">
-        <button type="button" (click)="submit()">Find Ability</button>
-    </form>
+    <div class="row"><h1>Search Ability here</h1></div>
+        <div class="row" *ngIf="errMsg">
+            {{errMsg}}
+        </div>
+    <div class="row">
+        <form [formGroup]="typeForm" class="form-control">
+            <label for="name">Search Ability here: </label>
+            <input type="text" name="name" formControlName="name" class="form-control">
+            <button type="button" (click)="submit()" class="btn btn-primary">Find Ability</button>
+        </form>    
+    </div>
 </div>
+<br>
 <div *ngIf="!a">
     <app-ability-list (abilityName)="searchAbilityByName($event)"></app-ability-list>
 </div>
 <div>
     <app-ability *ngIf="a" [a]="a"></app-ability>
 </div>
-<button type="button" (click)="backToList()">Back to List</button>
+<button type="button" (click)="backToList()" class="btn btn-primary">Back to List</button>

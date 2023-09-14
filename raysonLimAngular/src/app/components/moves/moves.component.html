@@ -2,49 +2,53 @@
     <div class="cols">
         <table class="table">
             <thead>
-                <th scope="col">Id</th>
-                <th scope="col">Name</th>
-                <th scope="col">Type</th>
-                <th scope="col">Details</th>
-                <th scope="col">Description</th>
-                <th scope="col">Pokemon That Can Learn This Move</th>
+                <tr class="table-warning">
+                    <th scope="col">Id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Details</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">(Some) Pokemon That Can Learn This Move</th>
+                </tr>
             </thead>
             <tbody>
-                <th scope="row">{{m.id}}</th>
-                <td style="padding: 20px">{{m.name | titlecase}}</td>
-                <td style="padding: 20px">{{m.type | titlecase}}</td>
-                <td style="padding: 20px">
-                    <label for="acc">Accuracy: </label>
-                    <div name="acc">
-                        {{m.accuracy}}
-                    </div>
-                    <label for="power">Power: </label>
-                    <div name="power">
-                        {{m.power}}
-                    </div>
-                    <label for="pp">Power Points: </label>
-                    <div name="pp">
-                        {{m.pp}}
-                    </div>
-                    <label for="pri">Priority: </label>
-                    <div name="pri">
-                        {{m.priority}}
-                    </div>
-                </td>
-                <td style="padding: 20px">
-                    {{m.desc}}
-                    <div *ngIf="m.effectChance">
-                        <label for="eff%">Effect Chance: </label>
+                <tr>
+                    <th scope="row" class="text-center align-middle">{{m.id}}</th>
+                    <td style="padding: 20px" class="text-center align-middle">{{m.name | titlecase}}</td>
+                    <td style="padding: 20px" class="text-center align-middle">{{m.type | titlecase}}</td>
+                    <td style="padding: 20px" class="text-center align-middle">
+                        <label for="acc">Accuracy: </label>
                         <div name="acc">
-                            {{m.effectChance}}
-                        </div>    
-                    </div>
-                </td>
-                <td>
-                    <ul>
-                        <li *ngFor="let p of randomP">{{p | titlecase}}</li>
-                    </ul>
-                </td>
+                            {{m.accuracy}}
+                        </div>
+                        <label for="power">Power: </label>
+                        <div name="power">
+                            {{m.power}}
+                        </div>
+                        <label for="pp">Power Points: </label>
+                        <div name="pp">
+                            {{m.pp}}
+                        </div>
+                        <label for="pri">Priority: </label>
+                        <div name="pri">
+                            {{m.priority}}
+                        </div>
+                    </td>
+                    <td style="padding: 20px" class="text-center align-middle">
+                        {{m.desc}}
+                        <div *ngIf="m.effectChance">
+                            <label for="eff%">Effect Chance: </label>
+                            <div name="acc">
+                                {{m.effectChance}}
+                            </div>    
+                        </div>
+                    </td>
+                    <td class="text-center align-middle">
+                        <ul>
+                            <li *ngFor="let p of randomP">{{p | titlecase}}</li>
+                        </ul>
+                    </td>    
+                </tr>
             </tbody>
         </table>
     </div>

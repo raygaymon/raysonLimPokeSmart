@@ -17,6 +17,7 @@ export class PokemonFormComponent {
   private router = inject(Router)
   pokemonResult = []
   pp: Pokemon
+  errMsg: string
 
   private fb = inject(FormBuilder)
   pokemonSearch: FormGroup
@@ -26,14 +27,20 @@ export class PokemonFormComponent {
   }
 
   getPokemonByName(name: string) {
-    this.service.getPokemonByName(name).subscribe((pokemon) => {
-      let p: Pokemon
-      p = pokemon.Pokemon
-      this.pp = pokemon.Pokemon
-      this.service.emitPkmn(p)
-      this.pokemonResult.push(p)
-      console.log(p)
+    this.service.getPokemonByName(name).subscribe({
+      next: (pokemon) => {
+          let p: Pokemon
+          p = pokemon.Pokemon
+          this.pp = pokemon.Pokemon
+          this.service.emitPkmn(p)
+          this.pokemonResult.push(p)
+          console.log(p)
+          },
+      error: () => {
+        this.errMsg = "Something went wrong, please double check the name you are searching"
+      }
     })
+      
   }
 
   createSearch() {

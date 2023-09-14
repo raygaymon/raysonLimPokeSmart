@@ -13,6 +13,7 @@ export class MoveFormComponent {
   private fb = inject(FormBuilder)
   typeForm: FormGroup
   m: Moves
+  errMsg: string
 
   ngOnInit(): void {
     this.typeForm = this.fb.group({
@@ -21,9 +22,13 @@ export class MoveFormComponent {
   }
 
   searchMoveByName(name: string) {
-    this.service.getMoveByName(name).subscribe((response) => {
-      this.m = response
-      console.log(response)
+    this.service.getMoveByName(name).subscribe({
+      next: (response) => {
+        this.m = response
+        console.log(response)
+      }, error: () => {
+        this.errMsg = "Something went wrong, please double check the name you are searching"
+      }
     })
   }
 

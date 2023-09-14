@@ -1,81 +1,142 @@
-<div *ngIf="token">
-    <div class="col">
-        <h1>Welcome {{username}}</h1>
-        <button type=button class="btn btn-primary" (click)="toggleCreate()"><h3>Create post</h3></button>
-        <button type=button class="btn btn-primary" (click)="toggleSeeTopics()"><h3>See topics</h3></button>
-        <button type=button class="btn btn-primary" (click)="toggleSeeOwnPosts()"><h3>See your own Posts</h3></button>
-        <div>
-            <span *ngIf="errMsg">{{errMsg}}</span>
-        </div>
-        <div *ngIf="chooseAction == 1" class="container">
-            <form [formGroup]="post">
-                <div>
-                    <input type="hidden" formControlName="username" value="{{username}}" class="text">
-                </div>
-                <div>
-                    <label for="topic">Topic: {{chosenTopic}} </label>
-                    <select formControlName="topic" [(ngModel)]="chosenTopic">
-                        <option *ngFor="let t of topics" [value]="t">{{t}}</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="post">Post: </label>
-                    <input type="text" class="post" formControlName="post" *ngIf="chosenTopic != 'Rate My Build'">
-
-                    <form [formGroup]="pokemonBuild" *ngIf="chosenTopic == 'Rate My Build'">
-                        <label for="name">POkemon name: </label>
-                        <input type="text" formControlName="name" name="name">
-                        <div>
-                            <button type="button" (click)="getPokemon(this.pokemonBuild.get('name').value)">Find Pokemon</button>
-                        </div>
-                        <div *ngIf="pkmn">
-                            <div>
-                                <img [src]="imageurl">
-                            </div>
-                            <label for="move1">Move 1: </label>
-                            <select formControlName="move1" name="move1">
-                                <option *ngFor="let m of moves" [value]="m">{{m}}</option>
-                            </select>
-                            <label for="move2">Move 2: </label>
-                            <select formControlName="move2" name="move2">
-                                <option *ngFor="let m of moves" [value]="m">{{m}}</option>
-                            </select>
-                            <label for="move3">Move 3: </label>
-                            <select formControlName="move3" name="move3">
-                                <option *ngFor="let m of moves" [value]="m">{{m}}</option>
-                            </select>
-                            <label for="move4">Move 4: </label>
-                            <select formControlName="move4">
-                                <option *ngFor="let m of moves" [value]="m">{{m}}</option>
-                            </select>
-                        </div>
-                        <div>
-                            <button type="button" (click)="submitPkmnBuild()">Create build</button>
-                        </div>
-                    </form>
-                </div>
-                <div *ngIf="chosenTopic != 'Rate My Build'"><label for="image">Picture: </label>
-                    <input type="file" accept="image/*" class="image" #file (change)="checkIfFileUploaded()">
-                </div>
-            </form>
-            <button type="button" class="btn btn-primary" *ngIf="!gotPicture" (click)="submit()" [disabled]="!post.get('post').valid">Submit post</button>
-            <button type="button" class="btn btn-primary" (change)="checkIfFileUploaded()" *ngIf="gotPicture"
-                (click)="uploadPic()">Submit Post with picture</button>
-        </div>
-        <div class="container" *ngIf="chooseAction == 2">
-            <h2>Search Posts By Topic</h2>
-            <select [(ngModel)]="chosenTopic">
-                <option *ngFor="let t of topics" [value]="t">{{t}}</option>
-            </select>
-            <button type="button" (click)="getPostsByTopic(chosenTopic)" style="cursor: pointer;">Get Posts</button>
-        </div>
-        <div class="container" *ngIf="chooseAction == 3">
-            <h2>Your Posts</h2>
+<div class="container">
+    <div class="row">
+        <div *ngIf="!token">
+            <h1>Please login or register before proceeding to the forums</h1>
+            <button class="btn btn-primary" (click)="goToLogin()">Login Now</button>
         </div>
     </div>
 </div>
-<app-posts *ngIf="posts" [p]="posts" [u]="username"></app-posts>
-<div *ngIf="!token">
-    <h1>Please login or register before proceeding to the forums</h1>
-    <button class="btn btn-primary" (click)="goToLogin()">Login Now</button>
+<div *ngIf="token">
+    <div class="row">
+        <h1>Welcome {{username}}</h1>
+    </div>
+    <div class="row">
+        <div class="col">
+            <ul class="nav nav-tabs" role="presentation">
+                <li class="nav-item">
+                    <button class="nav-link" (click)="toggleCreate()">
+                        Create post
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" (click)="toggleSeeTopics()">
+                        See Posts By Topic
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" (click)="toggleSeeOwnPosts()">
+                        Your posts
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <br>
+        <div>
+            <span *ngIf="errMsg">{{errMsg}}</span>
+        </div>
+        <div *ngIf="chooseAction == 1">
+            <form [formGroup]="post">
+                <div class="form-control">
+                    <label for="topic">Topic: {{chosenTopic}} </label>
+                    <select formControlName="topic" [(ngModel)]="chosenTopic" class="form-select">
+                        <option *ngFor="let t of topics" [value]="t">{{t}}</option>
+                    </select>
+                </div>
+                <div class="form-control">
+                    <label for="post">Post: </label>
+                    <textarea type="text" class="post" formControlName="post" rows="5px" cols="40px"
+                        *ngIf="chosenTopic != 'Rate My Build'" class="form-control"></textarea>
+                    <div class="container">
+                        <div class="row">
+                            <form [formGroup]="pokemonBuild" *ngIf="chosenTopic == 'Rate My Build'">
+                                <div class="form-group row">
+                                    <label for="name">Pokemon name: </label>
+                                    <input type="text" formControlName="name" name="name" class="form-control">
+                                    <div style="padding: 10px">
+                                        <button type="button" (click)="getPokemon(this.pokemonBuild.get('name').value)"
+                                            class="btn btn-primary">Find
+                                            Pokemon</button>
+                                    </div>
+                                </div>
+                                <div *ngIf="pkmn">
+                                    <div>
+                                        <img [src]="imageurl">
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="move1">Move 1: </label>
+                                        <select formControlName="move1" name="move1" class="custom-select mr-sm-2">
+                                            <option *ngFor="let m of moves" [value]="m">{{m}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="move2">Move 2: </label>
+                                        <select formControlName="move2" name="move2" class="custom-select mr-sm-2">
+                                            <option *ngFor="let m of moves" [value]="m">{{m}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="move3">Move 3: </label>
+                                        <select formControlName="move3" name="move3" class="custom-select mr-sm-2">
+                                            <option *ngFor="let m of moves" [value]="m">{{m}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="move4">Move 4: </label>
+                                        <select formControlName="move4" class="custom-select mr-sm-2" name="move4">
+                                            <option *ngFor="let m of moves" [value]="m">{{m}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div style="padding: 10px">
+                                    <button type="button" (click)="submitPkmnBuild()" class="btn btn-warning">Create
+                                        build</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+                <div *ngIf="chosenTopic != 'Rate My Build'" class="form-control">
+                    <label for="image">Picture: </label>
+                    <input type="file" accept="image/*" id="image" class="form-control-file" #file
+                        (change)="checkIfFileUploaded()">
+                </div>
+            </form>
+            <div style="padding: 10px">
+                <button type="button" class="btn btn-primary" *ngIf="!gotPicture" (click)="submit()"
+                [disabled]="!post.get('post').valid">Submit post</button>
+                <button type="button" class="btn btn-primary" (change)="checkIfFileUploaded()" *ngIf="gotPicture"
+                (click)="uploadPic()">Submit Post with picture</button>
+            </div>
+            
+        </div>
+        <div *ngIf="chooseAction == 2">
+            <div class="row">
+              <h2>Search Posts By Topic</h2>  
+            </div>
+            <div class="form-control">
+                <select [(ngModel)]="chosenTopic" class="form-select">
+                    <option *ngFor="let t of topics" [value]="t">{{t}}</option>
+                </select>
+                <div style="padding: 10px">
+                    <button type="button" (click)="getPostsByTopic(chosenTopic)" class="btn btn-outline-secondary">Get Posts</button>
+                </div>
+            </div>  
+        </div>
+        <div class="container" *ngIf="chooseAction == 3">
+            <div class="row">
+               <h2>Your Posts</h2> 
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<div class="container">
+    <div class="row">
+        <app-posts *ngIf="posts" [p]="posts" [u]="username"></app-posts>
+    </div>
 </div>

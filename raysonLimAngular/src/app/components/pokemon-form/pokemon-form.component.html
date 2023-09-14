@@ -2,6 +2,9 @@
     <div class="row">
         <h1>Pokemon Search Bar</h1>
     </div>
+    <div class="row" *ngIf="errMsg">
+        {{errMsg}}
+    </div>
     <div class="row">
         <form class="form-control" [formGroup]="pokemonSearch" style="padding: 20px; align-items: center;">
             <div class="form-group mb-2">
@@ -20,7 +23,7 @@
 </div>
 <div class="container">
     <div class="col">
-        <button (click)="backToList()">Back to list</button>
+        <button (click)="backToList()" class="btn btn-primary">Back to list</button>
     </div>
     
 </div>

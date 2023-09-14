@@ -13,6 +13,8 @@ export class PokemonComponent implements OnInit{
 
   constructor(private route: ActivatedRoute, private service: PokemonService, private router: Router ){}
 
+  movesFilter:number = 1
+
   ngOnInit(): void {
 
     this.service.pkmn$.subscribe((data) => {
@@ -26,5 +28,22 @@ export class PokemonComponent implements OnInit{
 
   backToPokemonList(){
     this.router.navigate(['/pokemon'])
+  }
+
+  toggleLevel() {
+    this.movesFilter = 1
+    this.pokemonElement.moves.filter( x => {return x.moveLearnMethod === "level-up"})
+    this.pokemonElement.moves.filter( x => {return x.levelLearnedAt === 0})
+  }
+
+  toggletmhm() {
+    this.movesFilter = 2
+    this.pokemonElement.moves.filter(x => { return x.moveLearnMethod === "machine" })
+  }
+  toggleEgg() {
+    this.movesFilter = 4
+  }
+  toggleTutor() {
+    this.movesFilter = 3
   }
 }

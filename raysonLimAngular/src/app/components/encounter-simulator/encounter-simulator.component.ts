@@ -89,7 +89,6 @@ export class EncounterSimulatorComponent implements OnInit {
     let p = Math.floor(Math.random() * this.encounters.length)
 
     this.getEncounterFromArray(this.encounters, this.chosenMethod)
-    this.encounter.name = this.encounter.name + "(Shiny)"
 
     this.encounter.minLevel = this.calcEncounterLevel(this.encounter.minLevel, this.encounter.maxLevel)
 

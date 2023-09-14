@@ -1,8 +1,24 @@
-<div>
-    <table class="table">
-        <tr *ngFor="let t of type">
-            <td><a (click)="sendName(t.name)" style="cursor: pointer;">{{t.name}}</a></td>
-        </tr>
-    </table>
+<div class="container">
+    <div class="table-responsive">
+        <table class="table align-middle table-striped table-sm ">
+            <thead >
+                <tr>
+                    <th scope="col" style="text-align: center">#</th>
+                    <th style="text-align: center">Move</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let t of type, let ind = index" style="text-align: center">
+                    <td>{{ind + 1}}</td>
+                    <td>
+                        <div>
+                            <img src='.\assets\gen8\{{t.name|lowercase}}.svg'>
+                        </div>
+                        <button class="btn btn-link"(click)="sendName(t.name)">
+                        {{t.name}}
+                        </button>
+                    </td>
+                </tr>
+        </table>
+    </div>
 </div>
-

@@ -1,23 +1,27 @@
 <div class="container">
     <div class="cols">
-        <table class="table">
+        <table class="table table-bordered">
             <thead>
-                <th scope="col">Id</th>
-                <th scope="col">Name</th>
-                <th scope="col">Effect</th>
-                <th scope="col">Flavor Text</th>
-                <th scope="col">Pokemon With Ability</th>
+                <tr class="table-info">
+                    <th scope="col">Id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Effect</th>
+                    <th scope="col">Flavor Text</th>
+                    <th scope="col">Pokemon With Ability</th>  
+                </tr>
             </thead>
             <tbody>
-                <th scope="row">{{a.id}}</th>
-                <td style="padding: 20px">{{a.name | titlecase}}</td>
-                <td style="padding: 20px">{{a.detailedDesc}}</td>
-                <td style="padding: 20px">{{a.desc}}</td>
-                <td style="padding: 20px">
-                    <div *ngFor="let p of a.pokemonWithAbility">
-                        {{p | titlecase}}
-                    </div>
-                </td>
+                <tr>
+                    <th scope="row" class="text-center align-middle">{{a.id}}</th>
+                    <td style="padding: 20px" class="text-center align-middle">{{a.name | titlecase}}</td>
+                    <td style="padding: 20px" class="text-center align-middle">{{a.detailedDesc}}</td>
+                    <td style="padding: 20px" class="text-center align-middle">{{a.desc}}</td>
+                    <td style="padding: 20px" class="text-center align-middle">
+                        <div *ngFor="let p of a.pokemonWithAbility">
+                            {{p | titlecase}},
+                        </div>
+                    </td>    
+                </tr>
             </tbody>
         </table>
     </div>

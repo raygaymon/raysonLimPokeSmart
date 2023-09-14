@@ -5,7 +5,8 @@ import { Subscription } from 'rxjs';
 import { Pokemon, PokemonBuild, Post } from 'src/app/models';
 import { ForumService } from 'src/app/services/forum.service';
 import { PokemonService } from 'src/app/services/pokemon.service';
-import { UserServiceService } from 'src/app/services/user-service.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ForumPopupComponent } from '../forum-popup/forum-popup.component';
 
 @Component({
   selector: 'app-forum',
@@ -23,6 +24,7 @@ export class ForumComponent implements OnInit {
   private service = inject(ForumService)
   private pokemon = inject(PokemonService)
   private router = inject(Router)
+  private dialogRef = inject(MatDialog)
 
   token: string
   username: string
@@ -66,6 +68,13 @@ export class ForumComponent implements OnInit {
     formData.set('file', this.imageFile.nativeElement.files[0]);
 
     this.service.uploadPostWithImage(formData)
+    this.dialogRef.open(ForumPopupComponent, {
+      data: {
+        'message': "Post successfully posted!"
+      }
+    })
+    this.post.reset()
+    
   }
 
   checkIfFileUploaded() {
@@ -86,7 +95,15 @@ export class ForumComponent implements OnInit {
 
     let p: Post = this.post.value
     this.sub = this.service.uploadPostNoImage(p).subscribe({
-      next: (response) => { alert("post successfully sent. you're in god's hands now " + response.toString()) },
+      next: () => { 
+          this.dialogRef.open(ForumPopupComponent, {
+
+            data: {
+              'message': "Post successfully posted!"
+            }
+          }),
+          this.post.reset()
+        },
       error: (err) => { this.errMsg = err.error.message },
       complete: () => this.sub.unsubscribe
     })
@@ -148,6 +165,7 @@ export class ForumComponent implements OnInit {
   }
 
   toggleCreate() {
+    this.posts = []
     this.chooseAction = 1
   }
   toggleSeeTopics() {

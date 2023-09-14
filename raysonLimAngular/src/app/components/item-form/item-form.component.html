@@ -1,15 +1,21 @@
-<h1>Search Type here</h1>
 <div class="container">
-    <form [formGroup]="typeForm">
+    <div class="row"><h1>Search Items here</h1></div>
+    <div class="row" *ngIf="errMsg">
+        {{errMsg}}
+    </div>
+    <div class="row">
+        <form [formGroup]="typeForm"class="form-control">
         <label for="name">Search Item here: </label>
-        <input type="text" name="name" formControlName="name">
-        <button type="button" (click)="submit()">Find Item</button>
-    </form>
+        <input type="text" name="name" class="form-control" formControlName="name">
+        <button type="button" (click)="submit()" class="btn btn-primary">Find Item</button>
+        </form>
+    </div>
 </div>
+<br>
 <div *ngIf="!i">
     <app-item-list (sendName)="searchItemByName($event)"></app-item-list>
 </div>
 <div>
     <app-item *ngIf="i" [i]="i"></app-item>
 </div>
-<button type="button" (click)="backToList()">Back to List</button>
+<button type="button" (click)="backToList()" class="btn btn-primary">Back to List</button>

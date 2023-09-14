@@ -1,94 +1,128 @@
-<p>{{type.name | titlecase}}</p>
-<img src='.\assets\gen8\{{type.name}}.svg'>
 <div class="container">
-    <div class="row">
-        <div class="col-xs-6">
-            <div class="well well-sm">
-                <h1>Weaknesses</h1>
-                <table>
-                    <tr *ngFor="let t of (type.damage_relations).double_damage_from">
-                        <td style="padding: 20px">{{t | titlecase}}
-                        </td>
-                        <td><img src='.\assets\gen8\{{t}}.svg'> </td>
-                    </tr>
-                    <tr>
-                        <td *ngIf="isListEmpty((type.damage_relations).double_damage_from)">Nothing</td>
-                    </tr>
-                </table>
-            </div>
-            <div class="well well-sm">
-                <h1>No effect from</h1>
-                <table>
-                    <tr *ngFor="let t of (type.damage_relations).no_damage_from">
-                        <td style="padding: 20px">{{t | titlecase}}
-                            <img src='.\assets\gen8\{{t}}.svg'>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td *ngIf="isListEmpty((type.damage_relations).no_damage_from)">Nothing</td>
-                    </tr>
-                </table>
-            </div>
-            <div class="well well-sm">
-                <h1>Resisted by</h1>
-                <table>
-                    <tr *ngFor="let t of (type.damage_relations).half_damage_to">
-                        <td style="padding: 20px">{{t | titlecase}}</td>
-                        <td><img src='.\assets\gen8\{{t}}.svg'></td>
-                    </tr>
-                    <tr>
-                        <td *ngIf="isListEmpty((type.damage_relations).half_damage_to)">Nothing</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-6">
-            <div class="well well-sm">
-                <h1>Resists</h1>
-                <table style="display: inline-block">
-                    <tr *ngFor="let t of (type.damage_relations).half_damage_from">
-                        <td style="padding: 20px">{{t | titlecase}}</td>
-                        <td><img src='.\assets\gen8\{{t}}.svg'></td>
-                    </tr>
-                    <tr>
-                        <td *ngIf="isListEmpty((type.damage_relations).half_damage_from)">Nothing</td>
-                    </tr>
-                </table>
-            </div>
-            <div class="well well-sm">
-                <h1>Super Effective Against</h1>
-                <table>
-                    <tr *ngFor="let t of (type.damage_relations).double_damage_to">
-                        <td style="padding: 20px">{{t | titlecase}}</td>
-                        <td><img src='.\assets\gen8\{{t}}.svg'></td>
-                    </tr>
-                    <tr>
-                        <td *ngIf="isListEmpty((type.damage_relations).double_damage_to)">Nothing</td>
-                    </tr>
-                </table>
-            </div>
-            <div class="well well-sm">
-                <h1>No effect against</h1>
-                <table>
-                    <tr *ngFor="let t of (type.damage_relations).no_damage_to">
-                        <td style="padding: 20px">{{t | titlecase}}</td>
-                        <td><img src='.\assets\gen8\{{t}}.svg'></td>
-                    </tr>
-                    <tr>
-                        <td *ngIf="isListEmpty((type.damage_relations).no_damage_to)">Nothing</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
+    <div class="d-flex justify-content-center">
+        <h2>{{type.name | titlecase}}</h2>
+        <img src='.\assets\gen8\{{type.name}}.svg'>
     </div>
 </div>
-
-
-
-
-
-    
-   
-
+<div class="container">
+    <div class="row">
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th colspan="2" class="text-center align-middle">
+                        <h4>Weaknesses</h4>
+                    </th>
+                    <th colspan="2" class="text-center align-middle">
+                        <h4>No effect from</h4>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="padding: 20px" colspan="2" class="text-center align-middle">
+                        <div *ngFor="let t of (type.damage_relations).double_damage_from">
+                            {{t | titlecase}}
+                            <div>
+                                <img src='.\assets\gen8\{{t}}.svg'>
+                            </div>
+                        </div>
+                        <div *ngIf="isListEmpty((type.damage_relations).double_damage_from)">
+                            Nothing
+                        </div>
+                    </td>
+                    <td style="padding: 20px" colspan="2" class="text-center align-middle">
+                        <div *ngFor="let t of (type.damage_relations).no_damage_from">
+                            {{t | titlecase}}
+                            <div>
+                                <img src='.\assets\gen8\{{t}}.svg'>
+                            </div>
+                        </div>
+                        <div *ngIf="isListEmpty((type.damage_relations).no_damage_from)">
+                            Nothing
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th class="text-center align-middle" colspan="2">
+                        <h4>Resisted by</h4>
+                    </th>
+                    <th class="text-center align-middle" colspan="2">
+                        <h4>Resists</h4>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2" class="text-center align-middle">
+                        <div *ngFor="let t of (type.damage_relations).half_damage_to">
+                            {{t | titlecase}}
+                            <div>
+                                <img src='.\assets\gen8\{{t}}.svg'>
+                            </div>
+                        </div>
+                        <div *ngIf="isListEmpty((type.damage_relations).half_damage_to)">
+                            Nothing
+                        </div>
+                    </td>
+                    <td colspan="2" class="text-center align-middle">
+                        <div *ngFor="let t of (type.damage_relations).half_damage_from">
+                            {{t | titlecase}}
+                            <div>
+                                <img src='.\assets\gen8\{{t}}.svg'>
+                            </div>
+                        </div>
+                        <div *ngIf="isListEmpty((type.damage_relations).half_damage_from)">
+                            Nothing
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th class="text-center align-middle" colspan="2">
+                        <h4>Super Effective Against</h4>
+                    </th>
+                    <th class="text-center align-middle" colspan="2">
+                        <h4>No effect against</h4>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td  colspan="2" class="text-center align-middle">
+                        <div *ngFor="let t of (type.damage_relations).double_damage_to">
+                            {{t | titlecase}}
+                            <div>
+                                <img src='.\assets\gen8\{{t}}.svg'>
+                            </div>
+                        </div>
+                        <div *ngIf="isListEmpty((type.damage_relations).double_damage_to)">
+                            Nothing
+                        </div>
+                    </td>
+                    <td colspan="2" class="text-center align-middle">
+                        <div *ngFor="let t of (type.damage_relations).no_damage_to">
+                            {{t | titlecase}}
+                            <div>
+                                <img src='.\assets\gen8\{{t}}.svg'>
+                            </div>
+                        </div>
+                        <div *ngIf="isListEmpty((type.damage_relations).no_damage_to)">
+                            Nothing
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

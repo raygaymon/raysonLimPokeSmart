@@ -1,34 +1,39 @@
 <div class="container">
     <div class="cols">
-        <table class="table">
+        <table class="table table-bordered">
             <thead>
-                <th scope="col">Id</th>
-                <th scope="col">Name</th>
-                <th scope="col">Cost</th>
-                <th scope="col">Fling</th>
-                <th scope="col">Effect</th>
-                <th scope="col">Flavor Text</th>
-                <th scope="col">Icon</th>
+                <tr class="table-primary">
+                    <th scope="col">Id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Cost</th>
+                    <th scope="col">Fling</th>
+                    <th scope="col">Effect</th>
+                    <th scope="col">Flavor Text</th>
+                    <th scope="col">Icon</th>                    
+                </tr>
             </thead>
             <tbody>
-                <th scope="row">{{item.id}}</th>
-                <td style="padding: 20px">{{item.name | titlecase}}</td>
-                <td style="padding: 20px">{{item.cost}}</td>
-                <td style="padding: 20px">
-                    <label for="effect">Effect: </label>
-                    <div name="effect">
-                        {{item.fling.effect}}
-                    </div>
-                    <label for="power">Power: </label>
-                    <div name="power">
-                        {{item.fling.power}}
-                    </div>
-                </td>
-                <td style="padding: 20px">{{item.effect}}</td>
-                <td style="padding: 20px">{{item.flavorText}}</td>
-                <td>
-                    <img [src]="item.sprite">
-                </td>
+                <tr>
+                    <th scope="row" class="text-center align-middle">{{item.id}}</th>
+                    <td style="padding: 20px" class="text-center align-middle">{{item.name | titlecase}}</td>
+                    <td style="padding: 20px" class="text-center align-middle">{{item.cost}}</td>
+                    <td style="padding: 20px" class="text-center align-middle">
+                        <label for="effect">Effect: </label>
+                        <div name="effect">
+                            {{item.fling.effect}}
+                        </div>
+                        <label for="power">Power: </label>
+                        <div name="power">
+                            {{item.fling.power}}
+                        </div>
+                    </td>
+                    <td style="padding: 20px" class="text-center align-middle">{{item.effect}}</td>
+                    <td style="padding: 20px" class="text-center align-middle">{{item.flavorText}}</td>
+                    <td class="align-middle">
+                        <img [src]="item.sprite">
+                    </td>                    
+                </tr>
+                
             </tbody>
         </table>
     </div>

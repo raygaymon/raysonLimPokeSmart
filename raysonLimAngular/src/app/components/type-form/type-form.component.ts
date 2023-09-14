@@ -15,6 +15,7 @@ export class TypeFormComponent implements OnInit {
   private fb = inject(FormBuilder)
   typeForm: FormGroup
   t: Type
+  errMsg: string
 
   ngOnInit() : void {
     this.typeForm = this.fb.group({
@@ -24,13 +25,17 @@ export class TypeFormComponent implements OnInit {
 
   searchTypeByName(name: string ){
     name = name.toLowerCase()
-    this.service.getTypeByName(name).subscribe((response) => {
+    this.service.getTypeByName(name).subscribe(
+      {next : (response) => {
       let t : Type
       this.t = response.Types
       t = response.Types
       this.typeSearched.emit(t)
-  
-    })
+    },
+    error : () => {
+      this.errMsg = "Something went wrong, please double check the name you are searching"
+    }
+  })
   }
 
   submit(){

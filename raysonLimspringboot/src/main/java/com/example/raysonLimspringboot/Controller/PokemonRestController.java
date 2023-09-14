@@ -42,51 +42,25 @@ public class PokemonRestController {
     @Autowired
     private LocationAreaService serviceLA;
 
-    @GetMapping("pokemon/id/{id}")
-    public ResponseEntity<String> getPokemonById (@PathVariable("id") Integer id) {
-        JsonObject pokemonResult = serviceP.getPokemonById(id);
-        
-
-        if (pokemonResult == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        } else {
-
-            return ResponseEntity.ok(
-                Json.createObjectBuilder()
-                    .add("Pokemon", pokemonResult)
-                    .build().toString()
-            ); 
-        }
-        
-    }
-
     @GetMapping("pokemon/name/{name}")
     public ResponseEntity<String> getPokemonByName (@PathVariable("name") String name) {
         
         JsonObject pokemonResult = serviceP.getPokemonByName(name);
 
-        if (pokemonResult == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        } else {
+        return ResponseEntity.ok(
+                Json.createObjectBuilder().add("Pokemon", pokemonResult).build().toString());
 
-            return ResponseEntity.ok(
-                Json.createObjectBuilder().add("Pokemon", pokemonResult).build().toString()
-            ); 
-        }
     }
+    
 
     @GetMapping("pokemon/all")
     public ResponseEntity<String> getAllPokemon (@RequestParam(name = "limit", required=false, defaultValue="20") String limit, @RequestParam(name = "offset", required=false, defaultValue="0") String offset) {
         JsonArray pokemonList = serviceP.getAllPokemon(limit, offset);
 
-        if (pokemonList == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        } else {
-
-            return ResponseEntity.ok(
+        return ResponseEntity.ok(
                 Json.createObjectBuilder().add("Pokemon", pokemonList).build().toString()
             ); 
-        }
+
     }
 
     @GetMapping("/types")

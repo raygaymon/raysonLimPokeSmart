@@ -1,5 +1,6 @@
 import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -34,12 +35,14 @@ import { EncounterSimulatorComponent } from './components/encounter-simulator/en
 import { DamageSimulatorComponent } from './components/damage-simulator/damage-simulator.component';
 import { AddDashPipe } from './pipes/add-dash.pipe';
 import { ForumComponent } from './components/forum/forum.component';
-import { LoginComponent } from './components/login/login.component';
+import { LogoutComponent } from './components/logout/logout.component';
 import { PostsComponent } from './components/posts/posts.component';
 import { RegisterAndLoginComponent } from './components/register-and-login/register-and-login.component';
 import { DonationComponent } from './components/donation/donation.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { HomeComponent } from './components/home/home.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ForumPopupComponent } from './components/forum-popup/forum-popup.component';
 
 @NgModule({
   declarations: [
@@ -70,12 +73,13 @@ import { HomeComponent } from './components/home/home.component';
     DamageSimulatorComponent,
     AddDashPipe,
     ForumComponent,
-    LoginComponent,
     PostsComponent,
     RegisterAndLoginComponent,
     DonationComponent,
     PaymentComponent,
-    HomeComponent
+    HomeComponent,
+    LogoutComponent,
+    ForumPopupComponent
   ],
   imports: [
     BrowserModule,
@@ -88,7 +92,9 @@ import { HomeComponent } from './components/home/home.component';
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
-    })
+    }),
+    BrowserAnimationsModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -17,7 +17,7 @@ public class UserRepo {
 
     private String FINDUSERNAME = "SELECT * FROM user WHERE username = ?;";
     private String REGISTERUSER = "INSERT INTO user (id, username, email, password, postCount) VALUES (?,?,?,?,?)";
-    private String UPDATEPOSTCOUNT = "UPDATE user set postCount = ? where username = ?";
+    private String UPDATEPOSTCOUNT = "UPDATE user set postCount = ? where id = ?";
     private String GETPOSTCOUNT = "SELECT postCount from user where username = ?";
 
     @Autowired
@@ -46,7 +46,7 @@ public class UserRepo {
 
     }
 
-    public Boolean updatePostCount(String username, Integer postCount) {
-        return jdbcTemplate.update(UPDATEPOSTCOUNT, username, postCount) > 0;
+    public Boolean updatePostCount(String id, Integer postCount) {
+        return jdbcTemplate.update(UPDATEPOSTCOUNT, postCount, id) > 0;
     }
 }

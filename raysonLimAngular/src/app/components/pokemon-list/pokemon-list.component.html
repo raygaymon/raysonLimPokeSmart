@@ -1,6 +1,6 @@
 <div class="container">
     <div class="table-responsive">
-        <table class="table align-middle table-danger table-sm ">
+        <table class="table table-danger table-sm ">
             <thead>
                 <tr>
                     <th scope="col" style="text-align: center">#</th>
@@ -14,7 +14,10 @@
                     <div>
                         <img src="assets/regular/{{la| lowercase}}.png">
                     </div>
-                    <a (click)="getPokemonDetails(la)" style="cursor: pointer;" >{{la | titlecase }}</a></td>
+                    <button class="btn btn-link" (click)="getPokemonDetails(la)">
+                    {{la | titlecase }}
+                    </button>
+                </td>
             </tr> 
             </tbody>
             
@@ -23,11 +26,14 @@
 </div>
 
 <div class="container" style="padding:5px">
-    <div class="col">
-        Page: 
-        <a *ngFor="let n of pages" (click)="goToPage(n)" style="cursor: pointer;color: blue"><u>{{n}}</u>&nbsp;&nbsp;</a>
+    <div class="row">
+        <div class="col">
+            Page:
+            <button *ngFor="let n of pages" class="btn btn-link" (click)="goToPage(n)">{{n}}
+            </button>
+        </div>
     </div>
 </div>
 <div class="container" style="padding:5px">
-    <button type="button" (click)="goToPage(1)">Top Of List</button>
+    <button type="button" (click)="goToPage(1)" class="btn btn-primary">Top Of List</button>
 </div>

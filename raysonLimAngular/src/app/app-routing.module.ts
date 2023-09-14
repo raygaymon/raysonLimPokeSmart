@@ -13,8 +13,10 @@ import { ForumComponent } from './components/forum/forum.component';
 import { RegisterAndLoginComponent } from './components/register-and-login/register-and-login.component';
 import { DonationComponent } from './components/donation/donation.component';
 import { PaymentComponent } from './components/payment/payment.component';
+import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
+  {path: '', component: HomeComponent},
   {path: 'pokemon', component: PokemonFormComponent},
   {path: 'pokemon/:name', component: PokemonComponent},
   {path: 'type', component: TypeFormComponent},

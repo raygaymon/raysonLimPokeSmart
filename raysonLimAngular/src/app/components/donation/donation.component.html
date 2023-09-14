@@ -1,24 +1,29 @@
-<div class="container" *ngIf="transactionMsg">
-    <h1>{{transactionMsg}}</h1>
-</div>
-<div class="paypal-container" id="donateToMe" *ngIf="!transactionMsg">
-    <div>Donate : ${{amount}}</div>
-    <div  *ngIf="customAmt">
-        <select [(ngModel)]="amount">
-            <option *ngFor="let d of donationAmounts" [value]="d">{{d}}</option>
-        </select>
+<div class="container" style="padding: 10px">
+    <div *ngIf="transactionMsg" class="row">
+        <h1>{{transactionMsg}}</h1>
     </div>
-    <div *ngIf="!customAmt">
-        <input type="number" [(ngModel)]="amount">
+    <div class="row">
+        <h1 class="text-center">Donation Amount : ${{amount}}</h1>
     </div>
-    <div>
-        <button class="btn btn-primary" *ngIf="customAmt" (click)="togglePaymentAmount()">Custom Donation</button>
-        <button class="btn btn-primary"  *ngIf="!customAmt" (click)="togglePaymentAmount()">Fixed Donation</button>
+    <div *ngIf="!transactionMsg" class="d-flex justify-content-center">
+        <div *ngIf="customAmt" class="form-control">
+            <select [(ngModel)]="amount" name="donationAmt" class="form-select">
+                <option *ngFor="let d of donationAmounts" [value]="d">{{d}}</option>
+            </select>
+            <div style="padding: 10px">
+                <button class="btn btn-outline-secondary" *ngIf="customAmt" (click)="togglePaymentAmount()">Custom
+                    Donation</button>
+            </div>
+        </div>
+        <div *ngIf="!customAmt" class="form-control">
+            <input type="number" name="donationAmt" class="form-control" [(ngModel)]="amount">
+            <div style="padding: 10px">
+                <button class="btn btn-outline-secondary" *ngIf="!customAmt" (click)="togglePaymentAmount()">Fixed
+                    Donation</button>
+            </div>
+        </div>
     </div>
-    <div>
-        <button class="btn btn-primary" (click)="generateButton()">
-            Donate
-        </button>
+    <div class="d-flex justify-content-center">
+        <div #paymentRef style="padding: 10px"></div>
     </div>
-    <div #paymentRef></div>
 </div>

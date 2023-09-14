@@ -1,17 +1,24 @@
-<h1>Search Type here</h1>
+
 <div class="container">
-    <form [formGroup] = "typeForm">
-        <label for="name">Search type here: </label>
-        <input type="text" name="name" formControlName="name">
-        <button type="button" (click)="submit()">Find Type</button>
-    </form>
+    <div class="row"><h1>Search Type here</h1></div>
+    <div class="row" *ngIf="errMsg">
+        {{errMsg}}
+    </div>
+    <div class="row">
+        <form [formGroup] = "typeForm" class="form-control">
+            <label for="name">Search type here: </label>
+            <input type="text" name="name" class="form-control" formControlName="name">
+            <button type="button" (click)="submit()" class="btn btn-primary">Find Type</button>
+        </form>    
+    </div>
 </div>
+<br>
 <div *ngIf="!t">
     <app-type-list (typeName)="searchTypeByName($event)"></app-type-list>
 </div>
 <div>
     <app-type *ngIf="t" [t]="t"></app-type>
 </div>
-<button type="button" (click)="backToList()">Back to List
+<button type="button" (click)="backToList()" class="btn btn-primary">Back to List
     
 </button>

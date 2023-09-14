@@ -1,16 +1,15 @@
 <div class="container" *ngIf="!emptyList">
     <div class="row">
-        <div>
-            <button type="button" [disabled]="!chosenMethod" (click)="rollEncounter()">Encounter Simulator</button>
-        </div>
-        <div>
-            <button type="button" (click)="shinyPokemon()">Test Shiny</button>
-        </div>
-        <div>
-            <select [(ngModel)]="chosenMethod">
+        <div class="form-control">
+            <label for="methods">Pick encounter method: </label>
+            <select [(ngModel)]="chosenMethod" class="form-control" id="methods">
                 <option *ngFor="let m of encounterMethods">{{m | titlecase}}</option>
             </select>
-            {{chosenMethod}}
+        </div>
+        <div class="form-control">
+            <button type="button" class="btn btn-primary" [disabled]="!chosenMethod" (click)="rollEncounter()">Encounter
+                Simulator</button>
+            <button type="button" class="btn btn-warning" (click)="shinyPokemon()">Test Shiny</button>
         </div>
     </div>
 </div>
@@ -19,15 +18,24 @@
 </div>
 <div class="container" *ngIf="encounter">
     <div class="col">
-        <div>
-            <h1>You Encountered: </h1>
+        <div class="d-flex justify-content-center">
+            <h3>You Encountered: </h3>
         </div>
-        <div>
-            <img src="assets/regular/{{encounter.name | lowercase}}.png">
-            <a style="cursor: pointer;" (click)="goToPokemon(encounter.name)">{{encounter.name | titlecase }}</a> at Level {{encounter.minLevel}} via {{displayMethod}}</div>
+        <div class="row">
+            <table class="table=">
+                <tr>
+                    <td class="text-center align-middle" colspan="3">
+                        <img src="assets/regular/{{encounter.name | lowercase}}.png" class="rounded mx-auto d-block">
+                        <button class="btn btn-link" (click)="goToPokemon(encounter.name)">
+                            {{encounter.name | titlecase }} (Shiny)
+                        </button>
+                        at Level {{encounter.minLevel}} via {{displayMethod}}
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
 </div>
-<div class="container">
+<div class="container" style="padding: 10px">
     <button type="button" (click)="backToLocationList()">Back</button>
 </div>
-

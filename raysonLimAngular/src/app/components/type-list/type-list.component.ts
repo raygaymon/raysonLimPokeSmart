@@ -14,7 +14,10 @@ export class TypeListComponent implements OnInit {
   ngOnInit():void{
     this.service.getAllTypes().subscribe((response)=>{
       for (let t of response['Types']){
-        this.type.push(t)
+        if((t.name != 'Unknown') && (t.name!='Shadow')) {
+          this.type.push(t)
+        }
+        
       }
     })
   }

@@ -1,16 +1,37 @@
-<div>
-    <table class="table">
-        <tr *ngFor="let i of items">
-            <td>
-                <img src="/assets/items/{{i|addDash}}.png">
-                <a (click)="sendItemName(i)" style="cursor: pointer;">{{i |titlecase}}</a></td>
-        </tr>
-    </table>
+<div class="container">
+    <div class="table-responsive">
+        <table class="table align-middle table-danger table-sm ">
+            <thead>
+                <tr>
+                    <th scope="col" style="text-align: center">#</th>
+                    <th style="text-align: center">Item</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let i of items, let ind = index" class="table-active" style="text-align: center">
+                    <td class="table-active" scope="row">{{ind+1}}</td>
+                    <td scope="row">
+                        <div>
+                            <img src="/assets/items/{{i|addDash}}.png">
+                        </div>
+                        <button class="btn btn-link" (click)="sendItemName(i)">
+                        {{i |titlecase}}
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
-<div>
-    Page:
-    <a *ngFor="let n of pages" (click)="goToPage(n)" style="cursor: pointer;color: blue"><u>{{n}}</u>&nbsp;&nbsp;</a>
+<div class="container" style="padding:5px">
+    <div class="row">
+        <div class="col">
+            Page:
+            <button *ngFor="let n of pages" class="btn btn-link" (click)="goToPage(n)">{{n}}
+            </button>
+        </div>
+    </div>
 </div>
-<div>
-    <button type="button" (click)="goToPage(1)">Top Of List</button>
+<div class="container" style="padding:5px">
+    <button type="button" (click)="goToPage(1)" class="btn btn-primary">Top Of List</button>
 </div>

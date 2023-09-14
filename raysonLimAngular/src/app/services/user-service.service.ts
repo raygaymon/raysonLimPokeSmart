@@ -15,12 +15,20 @@ export class UserServiceService {
   username : string
   errorMessage: string
 
+  private tokenEmitter = new Subject<string>();
+  public tokenEmitter$ = this.tokenEmitter.asObservable();
+
+
   createUser(signup: SignUpRecord){
     return this.http.post<any>(`${apiUrl}/register`, signup)
   }
 
   login(login: LoginRecord){
     return this.http.post<any>(`${apiUrl}/login`, login)
+  }
+
+  emitToken(x : any){
+    this.tokenEmitter.next(x)
   }
 
 }

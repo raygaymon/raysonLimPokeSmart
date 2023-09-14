@@ -3,6 +3,12 @@ import { Pokemon, Type } from './models';
 import { ActivatedRoute, Router } from '@angular/router';
 import { } from 'googlemaps';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { MatDialog } from '@angular/material/dialog'
+import { UserServiceService } from './services/user-service.service';
+import { RegisterAndLoginComponent } from './components/register-and-login/register-and-login.component';
+import { LogoutComponent } from './components/logout/logout.component';
+import { DonationComponent } from './components/donation/donation.component';
+import { ForumPopupComponent } from './components/forum-popup/forum-popup.component';
 
 @Component({
   selector: 'app-root',
@@ -14,9 +20,25 @@ export class AppComponent implements OnInit {
   @ViewChild('map') mapElement: ElementRef;
   map!: google.maps.Map;
 
+  title = 'raysonLimAngular';
+  paymentId;
+  payerId;
+
+  private http = inject(HttpClient)
+  private route = inject(ActivatedRoute)
+  private router = inject(Router)
+  private dialogRef = inject(MatDialog)
+
+  token: string
+  private login = inject(UserServiceService)
+  pokemon: Pokemon
+  type: Type
+
+
   ngOnInit(): void {
 
     localStorage.clear()
+
     this.route.queryParams.subscribe( params => {
       console.log(params)  
       this.paymentId = params['paymentId'],
@@ -37,6 +59,11 @@ export class AppComponent implements OnInit {
     const marker = new google.maps.Marker({
       position: new google.maps.LatLng(1.2923210380975625, 103.7765463514608),
       map: this.map})
+
+    this.login.tokenEmitter$.subscribe((response)=> {
+      console.log("subbed to token")
+        this.token = response
+      })
     
   }
 
@@ -46,27 +73,44 @@ export class AppComponent implements OnInit {
     param = param.set("PayerID", payerId)
     return this.http.post('paypal/complete/payment', paymentId, {
       params: param
-    }).subscribe((response) => console.log(response))
+    }).subscribe((response) => {
+      console.log(response)
+      this.dialogRef.open(ForumPopupComponent, {
+        data: {
+          'message': 'Your payment wen through successfully! Please check your email for your receipt.',
+        }
+    })
+    }
+    )
   }
 
-  title = 'raysonLimAngular';
-  paymentId;
-  payerId;
-  private http = inject(HttpClient)
-  private route = inject(ActivatedRoute)
-
-  token = localStorage.getItem("token")
-  private router = inject(Router)
-  pokemon: Pokemon
-  type: Type
-
-  onPokemonFormSubmission(p : Pokemon) {
-    this.pokemon = p
-    console.log(this.pokemon.toString())
+  loginPopUp(){
+    this.dialogRef.open(RegisterAndLoginComponent, {
+      height: 'auto',
+      width: '60%',
+    });
   }
 
-  onTypeFormSubmission(t: Type){
-    this.type = t
+  donationPopUp(){
+    this.dialogRef.open(DonationComponent, {
+      height: 'auto',
+      width: '40%',
+    })
+  }
+
+  logOutPopUp(){
+    this.dialogRef.open(LogoutComponent, {
+      data : {
+        'name': localStorage.getItem('username')
+      },
+      height: 'auto',
+      width: '60%',
+    })
+  }
+
+  logout(){
+    localStorage.clear()
+    this.router.navigate(['/'])
   }
 
 }

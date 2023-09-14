@@ -1,51 +1,61 @@
-<div class="container">
+<div class="container" style="padding:10px">
     <button type="button" *ngIf="!loginOrRegister" (click)="toggleLogin()">Register</button>
     <button type="button" *ngIf="loginOrRegister" (click)="toggleLogin()">Login</button>
 </div>
-<div class="container" *ngIf="loginOrRegister">
-    <H1>Register here</H1>
-    <span *ngIf="errorMessage" style="color: red">{{errorMessage}}</span>
-    <form [formGroup]="register" >
-        <table class="table-primary">
-            <tr>
-                <td>
+<div class="container">
+    <div *ngIf="loginOrRegister">
+        <H1>Register here</H1>
+        <div class="row">
+            <span *ngIf="errorMessage" style="color: red">{{errorMessage}}</span>
+            <form [formGroup]="register">
+                <div class="form-group">
                     <label for="username">Enter your username: </label>
-                    <input name="username" formControlName="username" type="text">
-                </td>
-            </tr>
-            <tr>
-                <td>
+                    <input name="username" class="form-control" formControlName="username"
+                        placeholder="Enter your desired username" type="text">
+                </div>
+                <div class="form-group">
                     <label for="email">Enter your Email: </label>
-                    <input name="email" formControlName="email" type="text">
-                </td>
-            </tr>
-            <tr>
-                <td>
+                    <input name="email" class="form-control" formControlName="email" type="text"
+                        placeholder="Enter your email">
+                </div>
+                <div class="form-group">
                     <label for="password">Enter your password: </label>
-                    <input name="password" formControlName="password" type="text">
-                </td>
-            </tr>
-        </table>
-        <button type="button" (click)="submitRegister()">Submit</button>
-    </form>
-</div>
-<div class="containter" *ngIf="!loginOrRegister">
-    <h1>Login Here</h1>
-        <form [formGroup]="login">
-            <table class="table-primary">
-                <tr>
-                    <td>
-                        <label for="username">Enter your username: </label>
-                        <input name="username" formControlName="username" type="text">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="password">Enter your password: </label>
-                        <input name="password" formControlName="password" type="text">
-                    </td>
-                </tr>
-            </table>
-            <button type="button" [disabled]="loggedIn" (click)="submitLogin()">Go To Forums</button>
-        </form>
+                    <input name="password" class="form-control" formControlName="password" type="{{inputType}}"
+                        placeholder="Enter your desired password">
+                </div>
+                <div style="padding: 5px">
+                    <button type="button" (click)="passwordVisiblity()">See Password</button>
+                </div>
+                <div style="padding:10px">
+                    <button type="button" class="btn btn-primary" (click)="submitRegister()"
+                        [mat-dialog-close]="true">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div *ngIf="!loginOrRegister">
+        <h1>Login Here</h1>
+        <div class="row">
+            <span *ngIf="errorMessage" style="color: red">{{errorMessage}}</span>
+            <form [formGroup]="login">
+                <div class="form-group">
+                    <label for="username">Enter your username: </label>
+                    <input name="username" class="form-control" formControlName="username" placeholder="Enter your username"
+                        type="text">
+                </div>
+                <div class="form-group">
+                    <label for="password">Enter your password: </label>
+                    <input name="password" class="form-control" formControlName="password" type="{{inputType}}"
+                        placeholder="Enter your password">
+                </div>
+                <div style="padding: 5px">
+                    <button type="button" (click)="passwordVisiblity()">See Password</button>
+                </div>
+                <div style="padding: 10px" class="col">
+                    <button type="button" [disabled]="loggedIn" class="btn btn-primary" [mat-dialog-close]="true"
+                        (click)="submitLogin()">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>

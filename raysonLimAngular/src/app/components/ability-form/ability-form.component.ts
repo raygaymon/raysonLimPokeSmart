@@ -13,6 +13,7 @@ export class AbilityFormComponent {
   private fb = inject(FormBuilder)
   typeForm: FormGroup
   a: Abilities
+  errMsg: string
 
   ngOnInit(): void {
     this.typeForm = this.fb.group({
@@ -21,10 +22,15 @@ export class AbilityFormComponent {
   }
 
   searchAbilityByName(name: string) {
-    this.service.getAbilityByName(name).subscribe((response) => {
+    this.service.getAbilityByName(name).subscribe({
+      next:(response) => {
       this.a = response
       console.log(response)
-    })
+    },
+      error: () => {
+      this.errMsg = "Something went wrong, please double check the name you are searching"
+      },
+  })
   }
 
   submit() {

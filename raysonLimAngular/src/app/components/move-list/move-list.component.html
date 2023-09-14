@@ -1,15 +1,34 @@
-<div>
-    <table class="table">
-        <tr *ngFor="let m of moves">
-            <td><a (click)="sendMoveName(m)" style="cursor: pointer;">{{m |titlecase}}</a></td>
-        </tr>
-    </table>
+<div class="container">
+    <div class="table-responsive">
+        <table class="table align-middle table-danger table-sm ">
+            <thead>
+                <tr>
+                    <th scope="col" class="text-center align-middle">#</th>
+                    <th class="text-center align-middle">Move</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let m of moves, let ind = index" class="table-active" style="text-align: center">
+                    <td >{{ind + 1}}</td>
+                    <td>
+                        <button class="btn btn-link" (click)="sendMoveName(m)">
+                        {{m |titlecase}}
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
-<div>
-    Page:
-    <a *ngFor="let n of pages" (click)="goToPage(n)" style="cursor: pointer;color: blue"><u>{{n}}</u>&nbsp;&nbsp;</a>
+<div class="container" style="padding:5px">
+    <div class="row">
+        <div class="col">
+            Page:
+            <button *ngFor="let n of pages" class="btn btn-link" (click)="goToPage(n)">{{n}}
+            </button>
+        </div>
+    </div>
 </div>
-<div>
-    <button type="button" (click)="goToPage(1)">Top Of List</button>
+<div class="container" style="padding:5px">
+    <button type="button" (click)="goToPage(1)" class="btn btn-primary">Top Of List</button>
 </div>
-

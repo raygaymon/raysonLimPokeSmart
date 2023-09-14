@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { PokemonBuild, Post, Reply } from 'src/app/models';
+import { Post, Reply } from 'src/app/models';
 import { ForumService } from 'src/app/services/forum.service';
 import { UserServiceService } from 'src/app/services/user-service.service';
 

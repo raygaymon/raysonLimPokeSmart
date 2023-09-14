@@ -53,11 +53,17 @@ public class PostService {
                                     .orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
 
         Integer postCountOfUser = user.getPostCount();
+        System.out.println(user.getId());
+
         if(postCountOfUser == 0){
             postCountOfUser = 1;
-            Boolean updatePostCountSuccess = userRepo.updatePostCount(p.getUserName(), postCountOfUser);
+            System.out.println("making post count 1");
+            Boolean updatePostCountSuccess = userRepo.updatePostCount(user.getId(), postCountOfUser);
+            System.out.println(updatePostCountSuccess);
         }   else {
-            Boolean updatePostCountSuccess = userRepo.updatePostCount(p.getUserName(), postCountOfUser + 1);
+            System.out.println("increasing postCount");
+            Boolean updatePostCountSuccess = userRepo.updatePostCount(user.getId(), postCountOfUser + 1);
+            System.out.println(updatePostCountSuccess);
         }
         
         Integer postId = postRepo.newPost(p);
@@ -74,9 +80,9 @@ public class PostService {
         Integer postCountOfUser = user.getPostCount();
         if(postCountOfUser == 0){
             postCountOfUser = 1;
-            Boolean updatePostCountSuccess = userRepo.updatePostCount(p.getUserName(), postCountOfUser);
+            Boolean updatePostCountSuccess = userRepo.updatePostCount(user.getId(), postCountOfUser);
         }   else {
-            Boolean updatePostCountSuccess = userRepo.updatePostCount(p.getUserName(), postCountOfUser + 1);
+            Boolean updatePostCountSuccess = userRepo.updatePostCount(user.getId(), postCountOfUser + 1);
         }
         return postRepo.newPostWithImage(p, imageUrl);
     }
