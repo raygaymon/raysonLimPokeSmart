@@ -30,7 +30,8 @@ const routes: Routes = [
   {path: 'register-login', component: RegisterAndLoginComponent},
   {path: 'donate', component: DonationComponent},
   {path: 'pay', component: PaymentComponent},
-  {path: 'cancel', component: PokemonComponent}
+  {path: 'cancel', component: PokemonComponent},
+  {path: "**", redirectTo:'', pathMatch: 'full'}
   
 ];
 
