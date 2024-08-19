@@ -3,7 +3,7 @@ Capstone project for Visa Technology Traineeship Program (VTTP)
 Project requirement was to develop a full web application, including backend server, frontend webpage, and database integration
 
 Backend was developed in Java with the Spring Framework
-Frontend was developed in Typescript woth AngularJS
+Frontend was developed in Typescript with AngularJS
 Database integrated was MySQL to contain user information, forum posts etc.
 
 Web application is PokeSmart, a Pokemon information application, where users can retrieve any information regarding any
